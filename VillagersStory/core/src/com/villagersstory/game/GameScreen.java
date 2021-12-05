@@ -1,10 +1,12 @@
 package com.villagersstory.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 import java.util.Timer;
@@ -15,6 +17,7 @@ public class GameScreen implements Screen {
     Texture bgImage;
     Rectangle bg;
     OrthographicCamera camera;
+    Vector3 cameraPos;
     public int day,hour,min;
     GameClock clock;
 
@@ -25,7 +28,8 @@ public class GameScreen implements Screen {
 
         // create the camera and the SpriteBatch
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 1280, 720);
+        camera.setToOrtho(false, 640, 360);
+        cameraPos = new Vector3();
 
         // create a Rectangle to logically represent the bucket
         bg = new Rectangle();
@@ -69,15 +73,46 @@ public class GameScreen implements Screen {
         game.font.draw(game.batch, "Day: "+day, 0, 690);
         game.font.draw(game.batch, "Hour: "+hour, 0, 680);
         game.font.draw(game.batch, "Min: "+min, 0, 670);
-
-
         game.batch.end();
 
         day = clock.day;
         hour = clock.hour;
         min = clock.min;
+        camera.position.lerp(cameraPos,0.1f);
 
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
+            cameraPos.x -= 200 * Gdx.graphics.getDeltaTime();
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
+            cameraPos.x += 200 * Gdx.graphics.getDeltaTime();
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN))
+            cameraPos.y -= 200 * Gdx.graphics.getDeltaTime();
+        if (Gdx.input.isKeyPressed(Input.Keys.UP))
+            cameraPos.y += 200 * Gdx.graphics.getDeltaTime();
 
+        // process user input
+        if (Gdx.input.isTouched()) {
+            Vector3 touchPos = new Vector3();
+            touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+            camera.unproject(touchPos);
+            cameraPos.x = touchPos.x;
+            cameraPos.y = touchPos.y;
+        }
+        // make sure the bucket stays within the screen bounds
+        /**
+         * camera formula:
+         * if (cameraPos.x < 0 + camWidth/2)
+         *  cameraPos.x = 0 + camWidth/2;
+         * if (cameraPos.x < max - camWidth/2)
+         *  cameraPos.x = max - camWidth/2;
+         */
+        if (cameraPos.x < 0 + 320)
+            cameraPos.x = 0 + 320;
+        if (cameraPos.x > 1280-320)
+            cameraPos.x = 1280-320;
+        if (cameraPos.y < 0 + 180)
+            cameraPos.y = 0 + 180;
+        if (cameraPos.y > 720 - 180)
+            cameraPos.y = 720 - 180;
     }
 
     @Override
