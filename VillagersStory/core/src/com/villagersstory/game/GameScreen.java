@@ -1,16 +1,13 @@
 package com.villagersstory.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class GameScreen implements Screen {
     final VillagerStory game;
@@ -21,10 +18,14 @@ public class GameScreen implements Screen {
     public int day,hour,min;
     GameClock clock;
 
+    Texture house;
+    GameInput gameInput = new GameInput();
+    GameCamera camSettings = GameCamera.getInstance();
+
     public GameScreen(final VillagerStory game) {
         this.game = game;
-
         bgImage = new Texture(Gdx.files.internal("background ex.png"));
+        house = new Texture(Gdx.files.internal("house64.png"));
 
         // create the camera and the SpriteBatch
         camera = new OrthographicCamera();
@@ -63,11 +64,14 @@ public class GameScreen implements Screen {
         // coordinate system specified by the camera.
         game.batch.setProjectionMatrix(camera.combined);
 
-        // begin a new batch and draw the bucket and
-        // all drops
+        Gdx.gl.glClearColor(0/255f, 0/255f, 0/255f, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         game.batch.begin();
 
         game.batch.draw(bgImage, bg.x, bg.y, bg.width, bg.height);
+
+        game.batch.draw(house, 0, 0, 64, 64);
 
         game.font.draw(game.batch, "Time: ", 0, 700);
         game.font.draw(game.batch, "Day: "+day, 0, 690);
@@ -80,39 +84,11 @@ public class GameScreen implements Screen {
         min = clock.min;
         camera.position.lerp(cameraPos,0.1f);
 
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
-            cameraPos.x -= 200 * Gdx.graphics.getDeltaTime();
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
-            cameraPos.x += 200 * Gdx.graphics.getDeltaTime();
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN))
-            cameraPos.y -= 200 * Gdx.graphics.getDeltaTime();
-        if (Gdx.input.isKeyPressed(Input.Keys.UP))
-            cameraPos.y += 200 * Gdx.graphics.getDeltaTime();
+        gameInput.receiveInput(cameraPos, camera); //go to input class
+        camSettings.move(cameraPos, camera);
+        if (Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.E))
+            camSettings.setResolution(camera);
 
-        // process user input
-        if (Gdx.input.isTouched()) {
-            Vector3 touchPos = new Vector3();
-            touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-            camera.unproject(touchPos);
-            cameraPos.x = touchPos.x;
-            cameraPos.y = touchPos.y;
-        }
-        // make sure the bucket stays within the screen bounds
-        /**
-         * camera formula:
-         * if (cameraPos.x < 0 + camWidth/2)
-         *  cameraPos.x = 0 + camWidth/2;
-         * if (cameraPos.x < max - camWidth/2)
-         *  cameraPos.x = max - camWidth/2;
-         */
-        if (cameraPos.x < 0 + 320)
-            cameraPos.x = 0 + 320;
-        if (cameraPos.x > 1280-320)
-            cameraPos.x = 1280-320;
-        if (cameraPos.y < 0 + 180)
-            cameraPos.y = 0 + 180;
-        if (cameraPos.y > 720 - 180)
-            cameraPos.y = 720 - 180;
     }
 
     @Override
