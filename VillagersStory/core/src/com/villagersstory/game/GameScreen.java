@@ -2,9 +2,7 @@ package com.villagersstory.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -21,6 +19,7 @@ public class GameScreen implements Screen {
     Texture house;
     GameInput gameInput = new GameInput();
     GameCamera camSettings = GameCamera.getInstance();
+    boolean camToggle = true;
 
     public GameScreen(final VillagerStory game) {
         this.game = game;
@@ -32,7 +31,6 @@ public class GameScreen implements Screen {
         camera.setToOrtho(false, 640, 360);
         cameraPos = new Vector3();
 
-        // create a Rectangle to logically represent the bucket
         bg = new Rectangle();
 
         // the bottom screen edge
@@ -51,10 +49,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        // clear the screen with a dark blue color. The
-        // arguments to clear are the red, green
-        // blue and alpha component in the range [0,1]
-        // of the color to be used to clear the screen.
         ScreenUtils.clear(0, 0, 0.2f, 1);
 
         // tell the camera to update its matrices.
@@ -85,14 +79,18 @@ public class GameScreen implements Screen {
         camera.position.lerp(cameraPos,0.1f);
 
         gameInput.receiveInput(cameraPos, camera); //go to input class
-        camSettings.move(cameraPos, camera);
-        if (Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.E))
-            camSettings.setResolution(camera);
+        camSettings.move(cameraPos, camera); //not used
+        if (Gdx.input.isKeyJustPressed(com.badlogic.gdx.Input.Keys.E)) { //make E click delay
+            camToggle=camSettings.setResolution(camera, camToggle);
+        }
+        if (Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.F)) {
+            bgImage = ColorChange.genTexture("background ex.png");
+        }
 
     }
 
     @Override
-    public void resize(int width, int height) {
+    public void resize(int width, int height) { //zoom method
     }
 
     @Override

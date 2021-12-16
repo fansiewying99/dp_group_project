@@ -4,6 +4,9 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 
 public class GameCamera {
+    /**
+     * return camera resolution,speed
+     */
     static GameCamera cam = new GameCamera();
     int width, height;
     int speed;
@@ -17,10 +20,18 @@ public class GameCamera {
     public void input(OrthographicCamera camera){
 
     }
-    public void setResolution(OrthographicCamera camera){
-        width = 1280;
-        height = 720;
+    public boolean setResolution(OrthographicCamera camera, boolean camToggle){
+        if(camToggle==true) {
+            width = 1280;
+            height = 720;
+        }
+        else{
+            width = 640;
+            height = 360;
+        }
         camera.setToOrtho(false, width, height);
+        camToggle=!camToggle;
+        return camToggle;
     }
 
     public void setSpeed(int speed){
