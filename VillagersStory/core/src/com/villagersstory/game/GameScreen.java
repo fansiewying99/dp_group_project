@@ -9,20 +9,25 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class GameScreen implements Screen {
     final VillagerStory game;
+    GameDisplay gameDisplay;
+    GameClock gameClock;
+    GameInput gameInput;
+    GameCamera gameCamera;
+
     Texture bgImage;
     Rectangle bg;
     OrthographicCamera camera;
     Vector3 cameraPos;
     public int day,hour,min;
-    GameClock clock;
 
     Texture house;
-    GameInput gameInput = new GameInput();
     GameCamera camSettings = GameCamera.getInstance();
     boolean camToggle = true;
 
     public GameScreen(final VillagerStory game) {
         this.game = game;
+        gameDisplay = new GameDisplay(game);
+        gameInput = new GameInput();
         bgImage = new Texture(Gdx.files.internal("background ex.png"));
         house = new Texture(Gdx.files.internal("house64.png"));
 
@@ -37,18 +42,13 @@ public class GameScreen implements Screen {
         bg.width = 1280;
         bg.height = 720;
 
-        clock = GameClock.getInstance();
-        try {
-            clock.startTime();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
     }
 
 
     @Override
     public void render(float delta) {
+        //update in real time camera, background, images, input
         ScreenUtils.clear(0, 0, 0.2f, 1);
 
         // tell the camera to update its matrices.
@@ -67,20 +67,15 @@ public class GameScreen implements Screen {
 
         game.batch.draw(house, 0, 0, 64, 64);
 
-        game.font.draw(game.batch, "Time: ", 0, 700);
-        game.font.draw(game.batch, "Day: "+day, 0, 690);
-        game.font.draw(game.batch, "Hour: "+hour, 0, 680);
-        game.font.draw(game.batch, "Min: "+min, 0, 670);
+        gameDisplay.render();//use GameDisplay class
+
         game.batch.end();
 
-        day = clock.day;
-        hour = clock.hour;
-        min = clock.min;
         camera.position.lerp(cameraPos,0.1f);
 
         gameInput.receiveInput(cameraPos, camera); //go to input class
         camSettings.move(cameraPos, camera); //not used
-        if (Gdx.input.isKeyJustPressed(com.badlogic.gdx.Input.Keys.E)) { //make E click delay
+        if (Gdx.input.isKeyJustPressed(com.badlogic.gdx.Input.Keys.E)) {
             camToggle=camSettings.setResolution(camera, camToggle);
         }
         if (Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.F)) {
