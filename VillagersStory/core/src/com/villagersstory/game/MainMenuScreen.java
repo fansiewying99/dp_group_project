@@ -23,12 +23,12 @@ public class MainMenuScreen implements Screen {
         this.game = game;
 
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 320, 180);
+        camera.setToOrtho(false, 1280, 720);
 
         bgImage = new Texture(Gdx.files.internal("title.png"));
         bg = new Rectangle();
-        bg.width = 320;
-        bg.height = 180;
+        bg.width = 1280;
+        bg.height = 720;
 
     }
 
