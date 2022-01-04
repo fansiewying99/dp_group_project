@@ -4,7 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameClock extends TimerTask {
-    private static GameClock gameClock = new GameClock();
+    private static GameClock clock = new GameClock();
     public int day,hour,min;
     public int i = 0;
     static Timer timer;
@@ -21,7 +21,7 @@ public class GameClock extends TimerTask {
         timer.scheduleAtFixedRate(timerTask, 0, 5 * 200);
     }
     public static GameClock getInstance(){
-        return gameClock;
+        return clock;
     }
 
     @Override
