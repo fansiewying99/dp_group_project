@@ -65,8 +65,6 @@ public class GameScreen implements Screen {
 
         game.batch.draw(bgImage, bg.x, bg.y, bg.width, bg.height);
 
-        game.batch.draw(house, 0, 0, 64, 64);
-
         gameDisplay.render();//use GameDisplay class
 
         game.batch.end();

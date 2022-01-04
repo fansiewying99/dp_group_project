@@ -56,7 +56,7 @@ public class GameDisplay {
     }
     public void generateHouse(){
         for(int i=0; i<10; i++) {
-            houses.add(new House("house64.png"));
+            houses.add(new House("house1.png"));
             houses.get(i).locationX = rand.nextInt(1280);
             houses.get(i).locationY = rand.nextInt(540);
         }
@@ -64,7 +64,7 @@ public class GameDisplay {
 
     private void displayHouse() {
         for(int i=0; i<10; i++) {
-            game.batch.draw(houses.get(i).image, houses.get(i).locationX, houses.get(i).locationY, 64, 64);
+            game.batch.draw(houses.get(i).image, houses.get(i).locationX, houses.get(i).locationY, 128, 128);
         }
     }
 
@@ -81,6 +81,7 @@ public class GameDisplay {
     }
     public void displayNPC(){
         for(int i=0; i<10; i++) {
+            npc.get(i).move();
             game.batch.draw(npc.get(i).image, npc.get(i).locationX, npc.get(i).locationY, 23, 48);
         }
     }
