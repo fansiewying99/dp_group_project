@@ -11,38 +11,50 @@ public class NPC extends GameObject{
     Random rand = new Random();
     ArrayList<Integer> movement = new ArrayList<>();
     GameClock clock = GameClock.getInstance();
-    int speed = 60;
+    double speed = 1;
     int direction = 0; //false = x
 
     int startTick = 0;
-    int endTick=startTick+3;
+    int endTick=startTick+1;
 
     public NPC(String imgFile) {
         image = new Texture(Gdx.files.internal(imgFile));
     }
     public String move(){
+        checkBounds();
         while(endTick>=clock.tick) {
             switch(direction) {
+//                Gdx.graphics.getDeltaTime()
                 case(0):
-                    locationX += speed * Gdx.graphics.getDeltaTime();
+                    locationX += speed;
                     break;
                 case(1):
-                    locationY += speed * Gdx.graphics.getDeltaTime();
+                    locationX -= speed;
                     break;
                 case(2):
-                    locationX -= speed * Gdx.graphics.getDeltaTime();
+                    locationY += speed;
                     break;
                 case(3):
-                    locationY -= speed * Gdx.graphics.getDeltaTime();
+                    locationY -= speed;
                     break;
             }
             System.out.println(startTick+" "+endTick);
             return null;
         }
         startTick = clock.tick;
-        endTick = startTick + 3;
+        endTick = startTick + 1;
 
         direction = rand.nextInt(4);
         return null;
+    }
+    public void checkBounds(){
+        if(locationX<0)
+            direction = 0;
+        else if(locationX>1280)
+            direction = 1;
+        else if(locationY<0)
+            direction = 2;
+        else if(locationY>540)
+            direction = 3;
     }
 }
