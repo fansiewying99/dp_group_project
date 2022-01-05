@@ -20,9 +20,9 @@ public class NPC extends GameObject{
     public NPC(String imgFile) {
         image = new Texture(Gdx.files.internal(imgFile));
     }
-    public String move(){
+    public void move(){
         checkBounds();
-        while(endTick>=clock.tick) {
+        if(endTick>=clock.tick) {
             switch(direction) {
 //                Gdx.graphics.getDeltaTime()
                 case(0):
@@ -38,16 +38,16 @@ public class NPC extends GameObject{
                     locationY -= speed;
                     break;
             }
-            System.out.println(startTick+" "+endTick);
-            return null;
         }
-        startTick = clock.tick;
-        endTick = startTick + 1;
+        else {
+            startTick = clock.tick;
+            endTick = startTick + 1;
 
-        direction = rand.nextInt(4);
-        return null;
+            direction = rand.nextInt(4);
+        }
+
     }
-    public void checkBounds(){
+    public void checkBounds(){ //world bounds 1280x540
         if(locationX<0)
             direction = 0;
         else if(locationX>1280)

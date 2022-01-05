@@ -38,6 +38,7 @@ public class GameDisplay {
         displayTime();
         displayHouse();
         displayNPC();
+        game.batch.draw(new Texture(Gdx.files.internal("tree1.png")), 320, 320, 72, 128);
     }
 
     public void sound(){
