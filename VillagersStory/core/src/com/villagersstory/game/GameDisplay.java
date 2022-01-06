@@ -8,16 +8,21 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.villagersstory.game.GameObjects.House;
 import com.villagersstory.game.GameObjects.NPC;
+import com.villagersstory.game.GameObjects.TreeOak;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * generate method should share
+ */
 public class GameDisplay {
     final VillagerStory game;
     GameClock clock;
     List<House> houses = new ArrayList<>();
     List<NPC> npc = new ArrayList<>();
+    List<TreeOak> trees = new ArrayList<>();
     Random rand = new Random();
 
     public GameDisplay(VillagerStory game) {
@@ -30,6 +35,7 @@ public class GameDisplay {
         }
         generateHouse();
         generateNPC();
+        generateTree();
     }
 
 
@@ -37,8 +43,8 @@ public class GameDisplay {
     public void render() {
         displayTime();
         displayHouse();
+        displayTree();
         displayNPC();
-        game.batch.draw(new Texture(Gdx.files.internal("tree_oak.png")), 320, 320, 128, 128);
     }
 
     public void sound(){
@@ -56,7 +62,7 @@ public class GameDisplay {
 
     }
     public void generateHouse(){
-        for(int i=0; i<10; i++) {
+        for(int i=0; i<5; i++) {
             houses.add(new House("house1.png"));
             houses.get(i).locationX = rand.nextInt(1280);
             houses.get(i).locationY = rand.nextInt(540);
@@ -64,15 +70,26 @@ public class GameDisplay {
     }
 
     private void displayHouse() {
-        for(int i=0; i<10; i++) {
-            game.batch.draw(houses.get(i).image, houses.get(i).locationX, houses.get(i).locationY, 256, 256);
+        for(int i=0; i<5; i++) {
+            game.batch.draw(houses.get(i).image, houses.get(i).locationX, houses.get(i).locationY, 128, 128);
         }
     }
 
 
     public void generateTree(){
-
+        for(int i=0; i<5; i++) {
+            trees.add(new TreeOak());
+            trees.get(i).locationX = rand.nextInt(1280);
+            trees.get(i).locationY = rand.nextInt(540);
+        }
     }
+
+    private void displayTree() {
+        for(int i=0; i<5; i++) {
+            game.batch.draw(trees.get(i).image, trees.get(i).locationX, trees.get(i).locationY, 128, 128);
+        }
+    }
+
     public void generateNPC(){
         for(int i=0; i<10; i++) {
             npc.add(new NPC("alex.png"));

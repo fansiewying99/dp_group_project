@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class NPC extends GameObject{
     Random rand = new Random();
-    ArrayList<Integer> movement = new ArrayList<>();
+    ArrayList<Integer> path = new ArrayList<>();
     GameClock clock = GameClock.getInstance();
     double speed = 1;
     int direction = 0; //false = x
@@ -22,7 +22,7 @@ public class NPC extends GameObject{
     }
     public void move(){
         checkBounds();
-        if(endTick>=clock.tick) {
+        if(endTick>=clock.tick) { //tick only changes direction
             switch(direction) {
 //                Gdx.graphics.getDeltaTime()
                 case(0):

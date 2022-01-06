@@ -10,7 +10,7 @@ public class DesktopLauncher {
 		config.title = "Villager Story";
 		config.width = 1280;
 		config.height = 720;
-		config.foregroundFPS = 60;
+		config.foregroundFPS = 60; //change fps
 		new LwjglApplication(new VillagerStory(), config);
 	}
 }
