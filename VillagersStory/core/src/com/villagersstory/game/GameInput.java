@@ -7,11 +7,11 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
 public class GameInput {
+    /**
+     * call object methods instead
+     */
     GameCamera camSettings = GameCamera.getInstance();
     public void receiveInput(Vector3 cameraPos, OrthographicCamera camera){
-//        if (Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.E))
-//            camera.setToOrtho(false, 1280, 720);
-
         if (Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.A))
             cameraPos.x -= 200 * Gdx.graphics.getDeltaTime();
         if (Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.D))
