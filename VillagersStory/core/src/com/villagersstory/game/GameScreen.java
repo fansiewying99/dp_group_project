@@ -27,6 +27,7 @@ public class GameScreen implements Screen {
         gameDisplay = new GameDisplay(game);
         gameInput = new GameInput();
         bgImage = new Texture(Gdx.files.internal("background ex.png"));
+        house = new Texture(Gdx.files.internal("house64.png"));
 
         // create the camera and the SpriteBatch
         camera = new OrthographicCamera();
@@ -58,6 +59,7 @@ public class GameScreen implements Screen {
         Gdx.gl.glClearColor(0/255f, 0/255f, 0/255f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+
         game.batch.begin();
         game.batch.draw(bgImage, bg.x, bg.y, bg.width, bg.height);
 
@@ -68,7 +70,9 @@ public class GameScreen implements Screen {
         camera.position.lerp(cameraPos,0.1f);
 
         gameInput.receiveInput(cameraPos, camera); //go to input class
-        camSettings.move(cameraPos, camera);
+
+        camSettings.move(cameraPos, camera); //not used
+
         if (Gdx.input.isKeyJustPressed(com.badlogic.gdx.Input.Keys.E)) {
             camToggle=camSettings.setResolution(camera, camToggle);
         }

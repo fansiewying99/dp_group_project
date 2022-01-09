@@ -20,7 +20,7 @@ public class GameClock extends TimerTask {
         tick=0;
         TimerTask timerTask = getInstance();
         timer = new Timer(false);
-        timer.scheduleAtFixedRate(timerTask, 0, 5 * 200);
+        timer.scheduleAtFixedRate(timerTask, 0, 5 * 100);
     }
     public static GameClock getInstance(){
         return clock;
@@ -30,7 +30,9 @@ public class GameClock extends TimerTask {
     public void run(){
         i++;
         min = i;
+
         tick++;
+
         if (min == 60) {
             min=0;
             i=0;

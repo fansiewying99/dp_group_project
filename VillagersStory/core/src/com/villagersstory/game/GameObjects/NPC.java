@@ -9,13 +9,39 @@ import java.util.Random;
 
 public class NPC extends GameObject{
     Random rand = new Random();
+
+    ArrayList<Integer> movement = new ArrayList<>();
+
     ArrayList<Integer> path = new ArrayList<>();
+
     GameClock clock = GameClock.getInstance();
     double speed = 1;
     int direction = 0; //false = x
 
     int startTick = 0;
     int endTick=startTick+1;
+
+
+    public NPC(String imgFile) {
+        image = new Texture(Gdx.files.internal(imgFile));
+    }
+    public void move(){
+        checkBounds();
+        if(endTick>=clock.tick) {
+            switch(direction) {
+//                Gdx.graphics.getDeltaTime()
+                case(0):
+                    locationX += speed;
+                    break;
+                case(1):
+                    locationX -= speed;
+                    break;
+                case(2):
+                    locationY += speed;
+                    break;
+                case(3):
+                    locationY -= speed;
+
     public float wait;
     public float initWait;
 
