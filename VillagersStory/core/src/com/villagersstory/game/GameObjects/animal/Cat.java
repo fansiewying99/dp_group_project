@@ -156,7 +156,6 @@ public class Cat extends GameObject implements Animal{
 		if(textureIndex < textures.size()-1) {
 			textureIndex+=1;	
 		}
-		
 		else
 			textureIndex=0;
 		image=textures.get(textureIndex);

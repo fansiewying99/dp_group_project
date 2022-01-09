@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-
 /**
  * generate method should share
  */
@@ -61,8 +60,6 @@ public class GameDisplay {
 
     }
 
-
-
     public void render() {
         displayTime();
         displayHouse();
@@ -89,7 +86,6 @@ public class GameDisplay {
 
     }
     public void generateHouse(){
-
     	/*FileHandle dirHandle;
 
 		dirHandle = Gdx.files.internal("../core/assets");
@@ -97,7 +93,6 @@ public class GameDisplay {
 		for (FileHandle entry: dirHandle.list()) {
 			System.out.println(entry);
 		}*/
-
 
         for(int i=0; i<5; i++) {
             houses.add(new House("house1.png"));
@@ -107,11 +102,8 @@ public class GameDisplay {
     }
 
     private void displayHouse() {
-
-
         for(int i=0; i<5; i++) {
             game.batch.draw(houses.get(i).image, houses.get(i).locationX, houses.get(i).locationY, 128, 128);
-
         }
     }
 
@@ -134,7 +126,7 @@ public class GameDisplay {
 
     public void generateNPC(){
         for(int i=0; i<10; i++) {
-            npc.add(new NPC("alex.png"));
+            npc.add(new NPC());
             npc.get(i).locationX = rand.nextInt(1280);
             npc.get(i).locationY = rand.nextInt(540);
         }
@@ -142,11 +134,10 @@ public class GameDisplay {
     public void displayNPC(){
         for(int i=0; i<10; i++) {
             npc.get(i).move();
-            game.batch.draw(npc.get(i).image, npc.get(i).locationX, npc.get(i).locationY, 23, 48);
+            game.batch.draw(npc.get(i).img, npc.get(i).locationX, npc.get(i).locationY, npc.get(i).imgWidth, npc.get(i).imgHeight);
         }
     }
     public void generateAnimal(){
-
     	//int ranInt=rand.nextInt(3);
     	for(int i=0; i<20; i++) {
     		int ranInt=rand.nextInt(3)+1;
@@ -177,12 +168,10 @@ public class GameDisplay {
         for(int i=0; i<animals.size(); i++) {
             animals.get(i).walk();
             game.batch.draw(animals.get(i).getImage(), animals.get(i).getLocationX(), animals.get(i).getLocationY(), 30, 30);
-           
         }
         for(int i=0; i<birds.size(); i++) {
             birds.get(i).fly();
             game.batch.draw(birds.get(i).getImage(), birds.get(i).getLocationX(), birds.get(i).getLocationY(), 130, 130);
         }
-
     }
 }
