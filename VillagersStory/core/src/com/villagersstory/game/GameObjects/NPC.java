@@ -16,9 +16,13 @@ public class NPC extends GameObject{
 
     int startTick = 0;
     int endTick=startTick+1;
+    public float wait;
+    public float initWait;
 
     public NPC(String imgFile) {
         image = new Texture(Gdx.files.internal(imgFile));
+        initWait=5;//actual speed control
+        wait=initWait;
     }
     public void move(){
         checkBounds();
@@ -34,13 +38,28 @@ public class NPC extends GameObject{
                     }
                     break;
                 case(1):
-                    locationX -= speed;
+                    if(wait==0) {
+                        locationX -= speed;
+                        wait=initWait;
+                    }else if(wait>0) {
+                        wait-=1;
+                    }
                     break;
                 case(2):
-                    locationY += speed;
+                    if(wait==0) {
+                        locationY += speed;
+                        wait=initWait;
+                    }else if(wait>0) {
+                        wait-=1;
+                    }
                     break;
                 case(3):
-                    locationY -= speed;
+                    if(wait==0) {
+                        locationY -= speed;
+                        wait=initWait;
+                    }else if(wait>0) {
+                        wait-=1;
+                    }
                     break;
             }
         }
