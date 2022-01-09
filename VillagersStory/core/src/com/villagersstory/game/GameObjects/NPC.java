@@ -9,13 +9,18 @@ import java.util.Random;
 
 public class NPC extends GameObject{
     Random rand = new Random();
+
     ArrayList<Integer> movement = new ArrayList<>();
+
+    ArrayList<Integer> path = new ArrayList<>();
+
     GameClock clock = GameClock.getInstance();
     double speed = 1;
     int direction = 0; //false = x
 
     int startTick = 0;
     int endTick=startTick+1;
+
 
     public NPC(String imgFile) {
         image = new Texture(Gdx.files.internal(imgFile));
@@ -36,6 +41,51 @@ public class NPC extends GameObject{
                     break;
                 case(3):
                     locationY -= speed;
+
+    public float wait;
+    public float initWait;
+
+    public NPC(String imgFile) {
+        image = new Texture(Gdx.files.internal(imgFile));
+        initWait=5;//actual speed control
+        wait=initWait;
+    }
+    public void move(){
+        checkBounds();
+        if(endTick>=clock.tick) { //tick only changes direction
+            switch(direction) {
+//                Gdx.graphics.getDeltaTime()
+                case(0):
+                    if(wait==0) {
+                        locationX += speed;
+                        wait=initWait;
+                    }else if(wait>0) {
+                        wait-=1;
+                    }
+                    break;
+                case(1):
+                    if(wait==0) {
+                        locationX -= speed;
+                        wait=initWait;
+                    }else if(wait>0) {
+                        wait-=1;
+                    }
+                    break;
+                case(2):
+                    if(wait==0) {
+                        locationY += speed;
+                        wait=initWait;
+                    }else if(wait>0) {
+                        wait-=1;
+                    }
+                    break;
+                case(3):
+                    if(wait==0) {
+                        locationY -= speed;
+                        wait=initWait;
+                    }else if(wait>0) {
+                        wait-=1;
+                    }
                     break;
             }
         }

@@ -18,9 +18,7 @@ public class GameScreen implements Screen {
     Rectangle bg;
     OrthographicCamera camera;
     Vector3 cameraPos;
-    public int day,hour,min;
 
-    Texture house;
     GameCamera camSettings = GameCamera.getInstance();
     boolean camToggle = true;
 
@@ -61,8 +59,8 @@ public class GameScreen implements Screen {
         Gdx.gl.glClearColor(0/255f, 0/255f, 0/255f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        game.batch.begin();
 
+        game.batch.begin();
         game.batch.draw(bgImage, bg.x, bg.y, bg.width, bg.height);
 
         gameDisplay.render();//use GameDisplay class
@@ -72,7 +70,9 @@ public class GameScreen implements Screen {
         camera.position.lerp(cameraPos,0.1f);
 
         gameInput.receiveInput(cameraPos, camera); //go to input class
+
         camSettings.move(cameraPos, camera); //not used
+
         if (Gdx.input.isKeyJustPressed(com.badlogic.gdx.Input.Keys.E)) {
             camToggle=camSettings.setResolution(camera, camToggle);
         }

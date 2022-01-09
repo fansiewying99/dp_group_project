@@ -30,7 +30,9 @@ public class GameClock extends TimerTask {
     public void run(){
         i++;
         min = i;
-        tick = i;
+
+        tick++;
+
         if (min == 60) {
             min=0;
             i=0;
