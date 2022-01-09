@@ -48,8 +48,6 @@ public class GameDisplay {
         displayHouse();
         displayNPC();
         displayAnimal();
-        
-        game.batch.draw(new Texture(Gdx.files.internal("../core/assets/alex.png")), 320, 320, 128, 128);
     }
 
     public void sound(){
