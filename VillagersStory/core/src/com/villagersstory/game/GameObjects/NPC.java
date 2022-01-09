@@ -26,7 +26,12 @@ public class NPC extends GameObject{
             switch(direction) {
 //                Gdx.graphics.getDeltaTime()
                 case(0):
-                    locationX += speed;
+                    if(wait==0) {
+                        locationX += speed;
+                        wait=initWait;
+                    }else if(wait>0) {
+                        wait-=1;
+                    }
                     break;
                 case(1):
                     locationX -= speed;
