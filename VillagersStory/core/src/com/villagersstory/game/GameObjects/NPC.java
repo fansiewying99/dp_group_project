@@ -20,28 +20,6 @@ public class NPC extends GameObject{
 
     int startTick = 0;
     int endTick=startTick+1;
-
-
-    public NPC(String imgFile) {
-        image = new Texture(Gdx.files.internal(imgFile));
-    }
-    public void move(){
-        checkBounds();
-        if(endTick>=clock.tick) {
-            switch(direction) {
-//                Gdx.graphics.getDeltaTime()
-                case(0):
-                    locationX += speed;
-                    break;
-                case(1):
-                    locationX -= speed;
-                    break;
-                case(2):
-                    locationY += speed;
-                    break;
-                case(3):
-                    locationY -= speed;
-
     public float wait;
     public float initWait;
 

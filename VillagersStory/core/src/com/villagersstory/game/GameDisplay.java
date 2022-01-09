@@ -69,11 +69,8 @@ public class GameDisplay {
 
         displayNPC();
         displayAnimal();
-        
-        game.batch.draw(new Texture(Gdx.files.internal("../core/assets/alex.png")), 320, 320, 128, 128);
 
         displayTree();
-        displayNPC();
 
     }
 
@@ -104,14 +101,12 @@ public class GameDisplay {
 
         for(int i=0; i<5; i++) {
             houses.add(new House("house1.png"));
-
             houses.get(i).locationX = rand.nextInt(1280);
             houses.get(i).locationY = rand.nextInt(540);
         }
     }
 
     private void displayHouse() {
-
 
 
         for(int i=0; i<5; i++) {
@@ -129,12 +124,7 @@ public class GameDisplay {
        }
 
     }
-    public void generateNPC(){
-        for(int i=0; i<10; i++) {
-            npc.add(new NPC("../core/assets/alex.png"));
 
-        
-    }
 
     private void displayTree() {
         for(int i=0; i<5; i++) {
@@ -193,7 +183,6 @@ public class GameDisplay {
             birds.get(i).fly();
             game.batch.draw(birds.get(i).getImage(), birds.get(i).getLocationX(), birds.get(i).getLocationY(), 130, 130);
         }
-
 
     }
 }

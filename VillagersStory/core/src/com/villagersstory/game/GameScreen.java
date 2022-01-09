@@ -27,7 +27,6 @@ public class GameScreen implements Screen {
         gameDisplay = new GameDisplay(game);
         gameInput = new GameInput();
         bgImage = new Texture(Gdx.files.internal("background ex.png"));
-        house = new Texture(Gdx.files.internal("house64.png"));
 
         // create the camera and the SpriteBatch
         camera = new OrthographicCamera();
