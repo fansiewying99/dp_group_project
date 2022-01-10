@@ -129,6 +129,5 @@ public class NPC extends GameObject{
         else
             textureIndex=0;
         img=textures.get(textureIndex);
-
     }
 }
