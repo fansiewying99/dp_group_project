@@ -21,7 +21,7 @@ public class NPC extends GameObject{
     int direction = 0; //false = x
 
     int startTick = 0;
-    int endTick=startTick+1;
+    int endTick=startTick+5;
     public float wait;
     public float initWait;
 
@@ -105,7 +105,7 @@ public class NPC extends GameObject{
         }
         else {
             startTick = clock.tick;
-            endTick = startTick + 1;
+            endTick = startTick + 5;
 
             direction = rand.nextInt(4);
         }
