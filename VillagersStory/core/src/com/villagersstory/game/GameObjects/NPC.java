@@ -18,10 +18,10 @@ public class NPC extends GameObject{
 
     GameClock clock = GameClock.getInstance();
     double speed = 2;
-    int direction = 0; //false = x
+    int direction = rand.nextInt(4); //false = x
 
     int startTick = 0;
-    int endTick=startTick+5;
+    int endTick=startTick+10;
     public float wait;
     public float initWait;
 
@@ -35,7 +35,7 @@ public class NPC extends GameObject{
 
     public NPC() {
 //        image = new Texture(Gdx.files.internal("Male.png"));
-        initWait=5;//actual speed control
+        initWait=15;//actual speed control
         wait=initWait;
 
         region = new TextureRegion(new Texture(Gdx.files.internal("Vi.png")));
@@ -105,7 +105,7 @@ public class NPC extends GameObject{
         }
         else {
             startTick = clock.tick;
-            endTick = startTick + 5;
+            endTick = startTick + 10;
 
             direction = rand.nextInt(4);
         }

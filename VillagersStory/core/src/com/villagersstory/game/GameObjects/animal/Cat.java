@@ -38,9 +38,7 @@ public class Cat extends GameObject implements Animal{
 	final Texture standDown;
 
     public Cat() {
-    	
         //image = new Texture(Gdx.files.internal(imgFile));
-    	
     	
     	//initialise textures
 		standRight=new Texture(Gdx.files.internal("cat/cat_right_stand.png"));
