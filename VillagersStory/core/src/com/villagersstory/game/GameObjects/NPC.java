@@ -38,7 +38,7 @@ public class NPC extends GameObject{
         initWait=5;//actual speed control
         wait=initWait;
 
-        region = new TextureRegion(new Texture("Vi.png"));
+        region = new TextureRegion(new Texture(Gdx.files.internal("Vi.png")));
         int frameWidth = region.getRegionWidth() / 12;
         imgWidth = frameWidth;
         imgHeight = region.getRegionHeight();
