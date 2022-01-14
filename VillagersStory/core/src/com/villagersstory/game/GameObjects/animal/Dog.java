@@ -43,18 +43,18 @@ public class Dog extends GameObject implements Animal{
     	
     	
     	//initialise textures
-    	standRight=new Texture(Gdx.files.internal("../core/assets/dog_right_stand.png"));
-		Texture walkRight1=new Texture(Gdx.files.internal("../core/assets/dog_right_walk_1.png"));
-		Texture walkRight2=new Texture(Gdx.files.internal("../core/assets/dog_right_walk_2.png"));
-		standLeft=new Texture(Gdx.files.internal("../core/assets/dog_left_stand.png"));
-		Texture walkLeft1=new Texture(Gdx.files.internal("../core/assets/dog_left_walk_1.png"));
-		Texture walkLeft2=new Texture(Gdx.files.internal("../core/assets/dog_left_walk_2.png"));
-		standUp=new Texture(Gdx.files.internal("../core/assets/dog_up_stand.png"));
-		Texture walkUp1=new Texture(Gdx.files.internal("../core/assets/dog_up_walk_1.png"));
-		Texture walkUp2=new Texture(Gdx.files.internal("../core/assets/dog_up_walk_2.png"));
-		standDown=new Texture(Gdx.files.internal("../core/assets/dog_down_stand.png"));
-		Texture walkDown1=new Texture(Gdx.files.internal("../core/assets/dog_down_walk_1.png"));
-		Texture walkDown2=new Texture(Gdx.files.internal("../core/assets/dog_down_walk_2.png"));
+		standRight=new Texture(Gdx.files.internal("dog/dog_right_stand.png"));
+		Texture walkRight1=new Texture(Gdx.files.internal("dog/dog_right_walk_1.png"));
+		Texture walkRight2=new Texture(Gdx.files.internal("dog/dog_right_walk_2.png"));
+		standLeft=new Texture(Gdx.files.internal("dog/dog_left_stand.png"));
+		Texture walkLeft1=new Texture(Gdx.files.internal("dog/dog_left_walk_1.png"));
+		Texture walkLeft2=new Texture(Gdx.files.internal("dog/dog_left_walk_2.png"));
+		standUp=new Texture(Gdx.files.internal("dog/dog_up_stand.png"));
+		Texture walkUp1=new Texture(Gdx.files.internal("dog/dog_up_walk_1.png"));
+		Texture walkUp2=new Texture(Gdx.files.internal("dog/dog_up_walk_2.png"));
+		standDown=new Texture(Gdx.files.internal("dog/dog_down_stand.png"));
+		Texture walkDown1=new Texture(Gdx.files.internal("dog/dog_down_walk_1.png"));
+		Texture walkDown2=new Texture(Gdx.files.internal("dog/dog_down_walk_2.png"));
 		
 		walkRightTextures.add(walkRight1);
 		walkRightTextures.add(walkRight2);
