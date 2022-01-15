@@ -1,6 +1,9 @@
 package com.villagersstory.game;
 
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 import com.villagersstory.game.GameObjects.House;
 import com.villagersstory.game.GameObjects.NPC;
 
@@ -24,6 +27,8 @@ import java.util.Random;
 public class GameDisplay {
     final VillagerStory game;
     GameClock clock;
+    Texture bgImage;
+    Rectangle bg;
     List<House> houses = new ArrayList<>();
     List<NPC> npc = new ArrayList<>();
 
@@ -42,6 +47,12 @@ public class GameDisplay {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        bgImage = new Texture(Gdx.files.internal("background ex.png"));
+        bg = new Rectangle();
+        // the bottom screen edge
+        bg.width = 1280;
+        bg.height = 720;
+
         generateHouse();
         generateNPC();
 
@@ -52,6 +63,7 @@ public class GameDisplay {
     }
 
     public void render() {
+        game.batch.draw(bgImage, bg.x, bg.y, bg.width, bg.height);
         displayTime();
         displayHouse();
 
@@ -130,7 +142,7 @@ public class GameDisplay {
     }
     public void generateAnimal(){
     	//int ranInt=rand.nextInt(3);
-    	for(int i=0; i<20; i++) {
+    	for(int i=0; i<10; i++) {
     		int ranInt=rand.nextInt(3)+1;
     		System.out.println(ranInt);
     		//int catnum=0;

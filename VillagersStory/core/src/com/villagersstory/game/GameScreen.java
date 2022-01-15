@@ -14,8 +14,8 @@ public class GameScreen implements Screen {
     GameInput gameInput;
     GameCamera gameCamera;
 
-    Texture bgImage;
-    Rectangle bg;
+//    Texture bgImage;
+//    Rectangle bg;
     OrthographicCamera camera;
     Vector3 cameraPos;
 
@@ -26,20 +26,18 @@ public class GameScreen implements Screen {
         this.game = game;
         gameDisplay = new GameDisplay(game);
         gameInput = new GameInput();
-        bgImage = new Texture(Gdx.files.internal("background ex.png"));
+//        bgImage = new Texture(Gdx.files.internal("background ex.png"));
 
         // create the camera and the SpriteBatch
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 640, 360);
         cameraPos = new Vector3();
 
-        bg = new Rectangle();
-
-        // the bottom screen edge
-        bg.width = 1280;
-        bg.height = 720;
-
-
+//        bg = new Rectangle();
+//
+//        // the bottom screen edge
+//        bg.width = 1280;
+//        bg.height = 720;
     }
 
 
@@ -47,10 +45,8 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         //update in real time camera, background, images, input
         ScreenUtils.clear(0, 0, 0.2f, 1);
-
         // tell the camera to update its matrices.
         camera.update();
-
         // tell the SpriteBatch to render in the
         // coordinate system specified by the camera.
         game.batch.setProjectionMatrix(camera.combined);
@@ -58,9 +54,8 @@ public class GameScreen implements Screen {
         Gdx.gl.glClearColor(0/255f, 0/255f, 0/255f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-
         game.batch.begin();
-        game.batch.draw(bgImage, bg.x, bg.y, bg.width, bg.height);
+//        game.batch.draw(bgImage, bg.x, bg.y, bg.width, bg.height);
 
         gameDisplay.render();//use GameDisplay class
 
@@ -75,9 +70,9 @@ public class GameScreen implements Screen {
         if (Gdx.input.isKeyJustPressed(com.badlogic.gdx.Input.Keys.E)) {
             camToggle=camSettings.setResolution(camera, camToggle);
         }
-        if (Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.F)) {
-            bgImage = ColorChange.genTexture("background ex.png");
-        }
+//        if (Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.F)) {
+//            bgImage = ColorChange.genTexture("background ex.png");
+//        }
 
     }
 
@@ -105,7 +100,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-        bgImage.dispose();
+//        bgImage.dispose();
     }
 
 }
