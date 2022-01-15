@@ -13,6 +13,8 @@ import com.villagersstory.game.GameObjects.animal.BirdAdapter;
 import com.villagersstory.game.GameObjects.animal.Cat;
 import com.villagersstory.game.GameObjects.animal.Dog;
 
+import com.villagersstory.game.GameObjects.tree.Tree;
+import com.villagersstory.game.GameObjects.tree.TreeFactory;
 import com.villagersstory.game.GameObjects.tree.TreeOak;
 
 
@@ -28,6 +30,7 @@ public class GameDisplay {
     final VillagerStory game;
     GameClock clock;
     Texture bgImage;
+    Texture mountainImage;
     Rectangle bg;
     List<House> houses = new ArrayList<>();
     List<NPC> npc = new ArrayList<>();
@@ -35,7 +38,8 @@ public class GameDisplay {
     List<Animal> animals = new ArrayList<>();
     List<BirdAdapter> birds = new ArrayList<>();
 
-    List<TreeOak> trees = new ArrayList<>();
+    TreeFactory treeFactory = new TreeFactory();
+    List<Tree> trees = new ArrayList<>();
 
     Random rand = new Random();
 
@@ -48,6 +52,7 @@ public class GameDisplay {
             e.printStackTrace();
         }
         bgImage = new Texture(Gdx.files.internal("background ex.png"));
+        mountainImage = new Texture(Gdx.files.internal("sky/mountains.png"));
         bg = new Rectangle();
         // the bottom screen edge
         bg.width = 1280;
@@ -57,21 +62,20 @@ public class GameDisplay {
         generateNPC();
 
         generateAnimal();
-
-        generateTree();
+        trees = treeFactory.trees;
 
     }
 
     public void render() {
+        game.batch.draw(mountainImage, 0, 520, 1368, 216);
         game.batch.draw(bgImage, bg.x, bg.y, bg.width, bg.height);
+
         displayTime();
         displayHouse();
-
-        displayNPC();
-        displayAnimal();
-
         displayTree();
 
+        displayAnimal();
+        displayNPC();
     }
 
     public void sound(){
@@ -111,19 +115,9 @@ public class GameDisplay {
     }
 
 
-    public void generateTree(){
-        for(int i=0; i<5; i++) {
-            trees.add(new TreeOak());
-            trees.get(i).locationX = rand.nextInt(1280);
-            trees.get(i).locationY = rand.nextInt(540);
-       }
-
-    }
-
-
     private void displayTree() {
-        for(int i=0; i<5; i++) {
-            game.batch.draw(trees.get(i).image, trees.get(i).locationX, trees.get(i).locationY, 128, 128);
+        for(int i=0; i< trees.size(); i++) {
+            game.batch.draw(trees.get(i).getImage(), trees.get(i).getLocationX(), trees.get(i).getLocationY(), 128, 128);
         }
     }
 

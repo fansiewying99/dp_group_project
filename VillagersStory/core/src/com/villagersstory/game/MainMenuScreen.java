@@ -24,7 +24,7 @@ public class MainMenuScreen implements Screen {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 1280, 720);
 
-        bgImage = new Texture(Gdx.files.internal("../core/assets/title.png"));
+        bgImage = new Texture(Gdx.files.internal("title3.png"));
 
         bg = new Rectangle();
         bg.width = 1280;

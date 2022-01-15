@@ -4,9 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.villagersstory.game.GameObjects.GameObject;
 
-public class TreeOak extends GameObject implements Tree{
-    String imgFile = "tree/tree_oak.png";
-    public TreeOak() {
+public class TreeDead extends GameObject implements Tree{
+    String imgFile = "tree/tree_dead.png";
+    public TreeDead() {
         image = new Texture(Gdx.files.internal(imgFile));
     }
     @Override
@@ -32,6 +32,7 @@ public class TreeOak extends GameObject implements Tree{
     public void setLocationY(int locationY) {
         this.locationY = locationY;
     }
+
     @Override
     public void generate() {
 

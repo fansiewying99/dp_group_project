@@ -12,6 +12,11 @@ import com.badlogic.gdx.graphics.Texture;
 public class GameObject {
     public Texture image;
     public Sound sound;
+    public int width;
+    public int height;
     public int locationX;
     public int locationY;
+    public void display(){
+
+    }
 }
