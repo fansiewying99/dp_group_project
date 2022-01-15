@@ -1,15 +1,6 @@
 package com.villagersstory.game;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 
-import com.badlogic.gdx.files.FileHandle;
-
-
-import com.badlogic.gdx.graphics.*;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.villagersstory.game.GameObjects.House;
 import com.villagersstory.game.GameObjects.NPC;
 
@@ -19,7 +10,7 @@ import com.villagersstory.game.GameObjects.animal.BirdAdapter;
 import com.villagersstory.game.GameObjects.animal.Cat;
 import com.villagersstory.game.GameObjects.animal.Dog;
 
-import com.villagersstory.game.GameObjects.TreeOak;
+import com.villagersstory.game.GameObjects.tree.TreeOak;
 
 
 import java.util.ArrayList;
@@ -95,7 +86,7 @@ public class GameDisplay {
 		}*/
 
         for(int i=0; i<5; i++) {
-            houses.add(new House("house1.png"));
+            houses.add(new House());
             houses.get(i).locationX = rand.nextInt(1280);
             houses.get(i).locationY = rand.nextInt(540);
         }

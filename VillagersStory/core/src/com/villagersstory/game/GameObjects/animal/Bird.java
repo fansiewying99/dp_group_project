@@ -34,9 +34,9 @@ public class Bird extends GameObject{
 	//final Texture standDown;
 	
 	public Bird() {
-		Texture flyRight1=new Texture(Gdx.files.internal("../core/assets/dragon_up_fly_1.png"));
-		Texture flyRight2=new Texture(Gdx.files.internal("../core/assets/dragon_up_fly_2.png"));
-		Texture flyRight3=new Texture(Gdx.files.internal("../core/assets/dragon_up_fly_3.png"));
+		Texture flyRight1=new Texture(Gdx.files.internal("dragon/dragon_up_fly_1.png"));
+		Texture flyRight2=new Texture(Gdx.files.internal("dragon/dragon_up_fly_2.png"));
+		Texture flyRight3=new Texture(Gdx.files.internal("dragon/dragon_up_fly_3.png"));
 		
 		flyUpTextures.add(flyRight1);
 		flyUpTextures.add(flyRight2);

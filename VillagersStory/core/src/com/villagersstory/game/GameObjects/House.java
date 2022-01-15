@@ -5,7 +5,8 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 
 public class House extends GameObject{
-    public House(String imgFile) {
+    String imgFile = "house/house1.png";
+    public House() {
         image = new Texture(Gdx.files.internal(imgFile));
     }
 }
