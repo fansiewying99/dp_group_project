@@ -31,7 +31,7 @@ public class GroundGrid {
                 grid[i][j] = new Texture(Gdx.files.internal(tileName[rand.nextInt(tileName.length)]));
                 //chance to spawn leaves
                 int chance = rand.nextInt(5);
-                if(chance == 0)//20% chance
+                if(chance == 0)//20% chance of spawning
                     grid[i][j] = combineTextures(grid[i][j], new Texture(Gdx.files.internal(grassLeaf[rand.nextInt(grassLeaf.length)])));
             }
         }

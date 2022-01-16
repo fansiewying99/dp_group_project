@@ -41,7 +41,7 @@ public class GameDisplay {
     List<BirdAdapter> birds = new ArrayList<>();
 
     TreeFactory treeFactory = new TreeFactory();
-    List<Tree> trees = new ArrayList<>();
+    List<Tree> trees;
 
     Random rand = new Random();
 
