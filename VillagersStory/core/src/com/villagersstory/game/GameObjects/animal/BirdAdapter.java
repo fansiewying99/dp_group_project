@@ -9,7 +9,7 @@ import com.villagersstory.game.GameClock;
 import com.villagersstory.game.GameObjects.GameObject;
 
 public class BirdAdapter implements Animal{
-	private Bird bird;
+	private final Bird bird;
 	
 	public BirdAdapter(Bird bird)
     {

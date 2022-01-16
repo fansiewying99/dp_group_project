@@ -2,8 +2,10 @@ package com.villagersstory.game;
 
 
 import com.badlogic.gdx.Gdx;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
+import com.villagersstory.game.GameObjects.ButtonObject;
 import com.villagersstory.game.GameObjects.House;
 import com.villagersstory.game.GameObjects.NPC;
 
@@ -45,6 +47,9 @@ public class GameDisplay {
 
     Random rand = new Random();
 
+    ButtonObject buttonObject = new ButtonObject();
+
+
     public GameDisplay(VillagerStory game) {
         this.game = game;
         clock = GameClock.getInstance();
@@ -66,7 +71,8 @@ public class GameDisplay {
         generateAnimal();
         trees = treeFactory.trees;
         ground.generateGrass();
-//        ground.generateParticle();
+        buttonObject.create();
+
     }
 
     public void render() {
@@ -80,6 +86,7 @@ public class GameDisplay {
         displayAnimal();
         displayNPC();
 
+        buttonObject.render();
     }
 
     public void sound(){
@@ -134,14 +141,14 @@ public class GameDisplay {
     }
 
     public void generateNPC(){
-        for(int i=0; i<10; i++) {
+        for(int i=0; i<3; i++) {
             npc.add(new NPC());
             npc.get(i).locationX = rand.nextInt(1280);
             npc.get(i).locationY = rand.nextInt(540);
         }
     }
     public void displayNPC(){
-        for(int i=0; i<10; i++) {
+        for(int i=0; i<3; i++) {
             npc.get(i).move();
             game.batch.draw(npc.get(i).img, npc.get(i).locationX, npc.get(i).locationY, npc.get(i).imgWidth, npc.get(i).imgHeight);
         }

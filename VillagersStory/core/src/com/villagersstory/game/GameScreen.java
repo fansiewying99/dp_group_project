@@ -14,8 +14,6 @@ public class GameScreen implements Screen {
     GameInput gameInput;
     GameCamera gameCamera;
 
-//    Texture bgImage;
-//    Rectangle bg;
     OrthographicCamera camera;
     Vector3 cameraPos;
 
@@ -26,18 +24,12 @@ public class GameScreen implements Screen {
         this.game = game;
         gameDisplay = new GameDisplay(game);
         gameInput = new GameInput();
-//        bgImage = new Texture(Gdx.files.internal("background ex.png"));
 
         // create the camera and the SpriteBatch
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 640, 360);
         cameraPos = new Vector3();
 
-//        bg = new Rectangle();
-//
-//        // the bottom screen edge
-//        bg.width = 1280;
-//        bg.height = 720;
     }
 
 
@@ -55,7 +47,6 @@ public class GameScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         game.batch.begin();
-//        game.batch.draw(bgImage, bg.x, bg.y, bg.width, bg.height);
 
         gameDisplay.render();//use GameDisplay class
 

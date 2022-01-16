@@ -5,7 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.*;
 
 public class ColorChange {
-    private static Color dusk = new Color(255/255f, 177/255f, 0/255f, 64/255f);//orange
+    private static final Color dusk = new Color(255/255f, 177/255f, 0/255f, 64/255f);//orange
 
     public static Texture genTexture(String texturename) {
         Texture tex =new Texture(Gdx.files.internal(texturename));
