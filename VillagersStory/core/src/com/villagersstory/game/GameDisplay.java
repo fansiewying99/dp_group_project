@@ -107,7 +107,9 @@ public class GameDisplay {
             houses.get(i).locationY = rand.nextInt(540);
         }
     }
+    private void displayGround() {
 
+    }
     private void displayHouse() {
         for(int i=0; i<5; i++) {
             game.batch.draw(houses.get(i).image, houses.get(i).locationX, houses.get(i).locationY, 128, 128);
