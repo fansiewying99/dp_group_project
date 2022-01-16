@@ -30,8 +30,8 @@ public class GroundGrid {
             for(int j=0; j<width/tileSize; j++){
                 grid[i][j] = new Texture(Gdx.files.internal(tileName[rand.nextInt(tileName.length)]));
                 //chance to spawn leaves
-                int chance = rand.nextInt(5);
-                if(chance == 0)//20% chance of spawning
+                int chance = rand.nextInt(10);
+                if(chance == 0)//10% chance of spawning
                     grid[i][j] = combineTextures(grid[i][j], new Texture(Gdx.files.internal(grassLeaf[rand.nextInt(grassLeaf.length)])));
             }
         }
@@ -41,17 +41,22 @@ public class GroundGrid {
             leaf.add(new Texture(Gdx.files.internal(grassLeaf[rand.nextInt(grassLeaf.length)])));
         }
     }
-    public static Texture combineTextures(Texture texture1, Texture texture2) {
+    public Texture combineTextures(Texture texture1, Texture texture2) {
         texture1.getTextureData().prepare();
         Pixmap pixmap1 = texture1.getTextureData().consumePixmap();
 
         texture2.getTextureData().prepare();
         Pixmap pixmap2 = texture2.getTextureData().consumePixmap();
+//        pixmap1.drawPixmap(pixmap2, 0, 0);
 
-        pixmap1.drawPixmap(pixmap2, 0, 0);
+        //randomized location of leaves
+        int x = rand.nextInt(pixmap1.getWidth()-pixmap2.getWidth());
+        int y = rand.nextInt(pixmap1.getHeight()-pixmap2.getHeight());
+
+        pixmap1.drawPixmap(pixmap2, x, y);
         Texture textureResult = new Texture(pixmap1);
 
-        pixmap1.dispose();
+        pixmap1.dispose();//must dispose
         pixmap2.dispose();
 
         return textureResult;
