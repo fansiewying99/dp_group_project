@@ -34,16 +34,32 @@ public class Bird extends GameObject{
 	//final Texture standDown;
 	
 	public Bird() {
-		Texture flyRight1=new Texture(Gdx.files.internal("dragon/dragon_up_fly_1.png"));
-		Texture flyRight2=new Texture(Gdx.files.internal("dragon/dragon_up_fly_2.png"));
-		Texture flyRight3=new Texture(Gdx.files.internal("dragon/dragon_up_fly_3.png"));
+		Texture flyUp1=new Texture(Gdx.files.internal("dragon/dragon_up_fly_1.png"));
+		Texture flyUp2=new Texture(Gdx.files.internal("dragon/dragon_up_fly_2.png"));
+		Texture flyUp3=new Texture(Gdx.files.internal("dragon/dragon_up_fly_3.png"));
+		Texture flyRight1=new Texture(Gdx.files.internal("dragon/dragon_right_fly_1.png"));
+		Texture flyRight2=new Texture(Gdx.files.internal("dragon/dragon_right_fly_2.png"));
+		Texture flyRight3=new Texture(Gdx.files.internal("dragon/dragon_right_fly_3.png"));
+		Texture flyLeft1=new Texture(Gdx.files.internal("dragon/dragon_left_fly_1.png"));
+		Texture flyLeft2=new Texture(Gdx.files.internal("dragon/dragon_left_fly_2.png"));
+		Texture flyLeft3=new Texture(Gdx.files.internal("dragon/dragon_left_fly_3.png"));
+		Texture flyDown1=new Texture(Gdx.files.internal("dragon/dragon_down_fly_1.png"));
+		Texture flyDown2=new Texture(Gdx.files.internal("dragon/dragon_down_fly_2.png"));
+		Texture flyDown3=new Texture(Gdx.files.internal("dragon/dragon_down_fly_3.png"));
 		
-		flyUpTextures.add(flyRight1);
-		flyUpTextures.add(flyRight2);
-		flyUpTextures.add(flyRight3);
-		flyRightTextures=flyUpTextures;
-		flyLeftTextures= flyUpTextures;
-		flyDownTextures=flyUpTextures;
+		flyUpTextures.add(flyUp1);
+		flyUpTextures.add(flyUp2);
+		flyUpTextures.add(flyUp3);
+		flyRightTextures.add(flyRight1);
+		flyRightTextures.add(flyRight2);
+		flyRightTextures.add(flyRight3);
+		flyLeftTextures.add(flyLeft1);
+		flyLeftTextures.add(flyLeft2);
+		flyLeftTextures.add(flyLeft3);
+		
+		flyDownTextures.add(flyDown1);
+		flyDownTextures.add(flyDown2);
+		flyDownTextures.add(flyDown3);
 		
 		image=flyRight1;
 		
