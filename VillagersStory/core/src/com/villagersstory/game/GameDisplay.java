@@ -15,7 +15,6 @@ import com.villagersstory.game.GameObjects.animal.Dog;
 
 import com.villagersstory.game.GameObjects.tree.Tree;
 import com.villagersstory.game.GameObjects.tree.TreeFactory;
-import com.villagersstory.game.GameObjects.tree.TreeOak;
 
 
 import java.util.ArrayList;
@@ -54,7 +53,7 @@ public class GameDisplay {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        bgImage = new Texture(Gdx.files.internal("background ex.png"));
+//        bgImage = new Texture(Gdx.files.internal("background ex.png"));
         mountainImage = new Texture(Gdx.files.internal("sky/mountains.png"));
         bg = new Rectangle();
         // the bottom screen edge
@@ -67,11 +66,12 @@ public class GameDisplay {
         generateAnimal();
         trees = treeFactory.trees;
         ground.generateGrass();
+//        ground.generateParticle();
     }
 
     public void render() {
         game.batch.draw(mountainImage, 0, 520, 1368, 216);
-        game.batch.draw(bgImage, bg.x, bg.y, bg.width, bg.height);
+//        game.batch.draw(bgImage, bg.x, bg.y, bg.width, bg.height);
         displayGround();
         displayTime();
         displayHouse();
@@ -117,6 +117,8 @@ public class GameDisplay {
                 game.batch.draw(ground.grid[i][j], j*ground.tileSize, i*ground.tileSize, ground.tileSize, ground.tileSize);
             }
         }
+//        for(int i=0; i<ground.leaf.size(); i++)
+//            game.batch.draw(ground.leaf.get(i), i*ground.tileSize, i*ground.tileSize, 24,24);
     }
     private void displayHouse() {
         for(int i=0; i<5; i++) {
