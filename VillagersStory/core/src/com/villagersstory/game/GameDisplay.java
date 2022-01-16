@@ -32,6 +32,9 @@ public class GameDisplay {
     Texture bgImage;
     Texture mountainImage;
     Rectangle bg;
+
+    GroundGrid ground = new GroundGrid();
+
     List<House> houses = new ArrayList<>();
     List<NPC> npc = new ArrayList<>();
 
@@ -63,19 +66,20 @@ public class GameDisplay {
 
         generateAnimal();
         trees = treeFactory.trees;
-
+        ground.generateGrass();
     }
 
     public void render() {
         game.batch.draw(mountainImage, 0, 520, 1368, 216);
         game.batch.draw(bgImage, bg.x, bg.y, bg.width, bg.height);
-
+        displayGround();
         displayTime();
         displayHouse();
         displayTree();
 
         displayAnimal();
         displayNPC();
+
     }
 
     public void sound(){
@@ -108,7 +112,11 @@ public class GameDisplay {
         }
     }
     private void displayGround() {
-
+        for(int i=0; i< ground.height/ground.tileSize; i++) {
+            for (int j = 0; j < ground.width /ground.tileSize; j++) {
+                game.batch.draw(ground.grid[i][j], j*ground.tileSize, i*ground.tileSize, ground.tileSize, ground.tileSize);
+            }
+        }
     }
     private void displayHouse() {
         for(int i=0; i<5; i++) {
