@@ -6,7 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.villagersstory.game.GameObjects.ButtonObject;
-import com.villagersstory.game.GameObjects.House;
+import com.villagersstory.game.GameObjects.house.House;
 import com.villagersstory.game.GameObjects.NPC;
 
 import com.villagersstory.game.GameObjects.animal.Animal;
