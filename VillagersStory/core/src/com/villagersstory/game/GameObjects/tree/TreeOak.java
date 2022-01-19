@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.villagersstory.game.GameObjects.GameObject;
 
+import java.util.ArrayList;
+
 public class TreeOak extends GameObject implements Tree{
     String imgFile = "tree/tree_oak.png";
     public TreeOak() {
@@ -43,7 +45,7 @@ public class TreeOak extends GameObject implements Tree{
     }
 
     @Override
-    public void dropFruit() {
-
+    public ArrayList<Fruit> dropFruit() {
+        return null;
     }
 }

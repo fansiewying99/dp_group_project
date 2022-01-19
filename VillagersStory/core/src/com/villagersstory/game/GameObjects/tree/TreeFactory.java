@@ -23,5 +23,6 @@ public class TreeFactory {
             trees.get(i).setLocationX(rand.nextInt(1280));
             trees.get(i).setLocationY(rand.nextInt(540));
         }
+        trees.get(1).generate();
     }
 }

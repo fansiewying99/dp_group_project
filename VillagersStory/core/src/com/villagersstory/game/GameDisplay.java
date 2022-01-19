@@ -1,11 +1,10 @@
 package com.villagersstory.game;
 
-
 import com.badlogic.gdx.Gdx;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
-import com.villagersstory.game.GameObjects.ButtonObject;
+import com.villagersstory.game.GameObjects.GameUI;
 import com.villagersstory.game.GameObjects.house.House;
 import com.villagersstory.game.GameObjects.NPC;
 
@@ -15,6 +14,7 @@ import com.villagersstory.game.GameObjects.animal.BirdAdapter;
 import com.villagersstory.game.GameObjects.animal.Cat;
 import com.villagersstory.game.GameObjects.animal.Dog;
 
+import com.villagersstory.game.GameObjects.tree.Fruit;
 import com.villagersstory.game.GameObjects.tree.Tree;
 import com.villagersstory.game.GameObjects.tree.TreeFactory;
 
@@ -47,8 +47,8 @@ public class GameDisplay {
 
     Random rand = new Random();
 
-    ButtonObject buttonObject = new ButtonObject();
-
+    GameUI gameUI = new GameUI();
+    Cursor cursor = Cursor.getInstance();
 
     public GameDisplay(VillagerStory game) {
         this.game = game;
@@ -71,22 +71,28 @@ public class GameDisplay {
         generateAnimal();
         trees = treeFactory.trees;
         ground.generateGrass();
-        buttonObject.create();
+        gameUI.create();
 
     }
 
     public void render() {
-        game.batch.draw(mountainImage, 0, 520, 1368, 216);
+        game.batch.draw(mountainImage, 0, 520);
 //        game.batch.draw(bgImage, bg.x, bg.y, bg.width, bg.height);
+
         displayGround();
-        displayTime();
+//
         displayHouse();
         displayTree();
 
         displayAnimal();
         displayNPC();
 
-        buttonObject.render();
+        displayTime();
+//
+        game.batch.end();
+        gameUI.render();
+        npc.get(0).draw();
+        cursor.draw(GameScreen.camera);
     }
 
     public void sound(){
@@ -97,7 +103,6 @@ public class GameDisplay {
     }
 
     public void displayTime(){
-        game.font.draw(game.batch, "Time ", 0, 700);
         game.font.draw(game.batch, "Day: "+clock.day, 0, 690);
         game.font.draw(game.batch, "Hour: "+clock.hour, 0, 680);
         game.font.draw(game.batch, "Min: "+clock.min, 0, 670);
@@ -137,6 +142,11 @@ public class GameDisplay {
     private void displayTree() {
         for(int i=0; i< trees.size(); i++) {
             game.batch.draw(trees.get(i).getImage(), trees.get(i).getLocationX(), trees.get(i).getLocationY(), 128, 128);
+
+        }
+        ArrayList<Fruit> fruits = trees.get(1).dropFruit();
+        for(int i=0; i< fruits.size(); i++) {
+            game.batch.draw(fruits.get(i).getImage(), fruits.get(i).getLocationX(), fruits.get(i).getLocationY(), 16, 16);
         }
     }
 

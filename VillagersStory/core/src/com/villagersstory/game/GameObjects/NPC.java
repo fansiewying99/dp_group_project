@@ -1,10 +1,15 @@
 package com.villagersstory.game.GameObjects;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
+import com.villagersstory.game.Cursor;
 import com.villagersstory.game.GameClock;
+import org.w3c.dom.css.Rect;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +19,9 @@ public class NPC extends GameObject{
     public TextureRegion img;
     public int imgWidth;
     public int imgHeight;
+    public Rectangle hitbox = new Rectangle();
+    Cursor cursor = Cursor.getInstance();
+
     Random rand = new Random();
 
     GameClock clock = GameClock.getInstance();
@@ -32,7 +40,7 @@ public class NPC extends GameObject{
     final List<TextureRegion> walkLeftTextures=new ArrayList<>();
     final List<TextureRegion> walkUpTextures=new ArrayList<>();
     final List<TextureRegion> walkDownTextures=new ArrayList<>();
-
+    ShapeRenderer shapeRenderer;
     public NPC() {
 //        image = new Texture(Gdx.files.internal("Male.png"));
         initWait=15;//actual speed control
@@ -43,7 +51,6 @@ public class NPC extends GameObject{
         imgWidth = frameWidth;
         imgHeight = region.getRegionHeight();
 
-        img = new TextureRegion(region, 0 * frameWidth, 0, frameWidth, region.getRegionHeight());
         walkUpTextures.add(new TextureRegion(region, 0 * frameWidth, 0, frameWidth, region.getRegionHeight()));
         walkUpTextures.add(new TextureRegion(region, 1 * frameWidth, 0, frameWidth, region.getRegionHeight()));
         walkUpTextures.add(new TextureRegion(region, 2 * frameWidth, 0, frameWidth, region.getRegionHeight()));
@@ -59,9 +66,19 @@ public class NPC extends GameObject{
         walkLeftTextures.add(new TextureRegion(region, 9 * frameWidth, 0, frameWidth, region.getRegionHeight()));
         walkLeftTextures.add(new TextureRegion(region, 10 * frameWidth, 0, frameWidth, region.getRegionHeight()));
         walkLeftTextures.add(new TextureRegion(region, 11 * frameWidth, 0, frameWidth, region.getRegionHeight()));
+        img = walkDownTextures.get(1);
+        hitbox.setSize(imgWidth, imgHeight);
+        shapeRenderer = new ShapeRenderer();
+
     }
     public void move(){
         checkBounds();
+        hitbox.setPosition(locationX, locationY);
+        //if overlap with mouse cursor
+        if(hitbox.overlaps(cursor.box)){
+            System.out.println("NPC overlap cursor");
+        }
+
         if(endTick>=clock.tick) {
             switch(direction) {
 //                Gdx.graphics.getDeltaTime()
@@ -110,6 +127,7 @@ public class NPC extends GameObject{
             direction = rand.nextInt(4);
         }
 
+
     }
     public void checkBounds(){ //world bounds 1280x540
         if(locationX<0)
@@ -129,5 +147,10 @@ public class NPC extends GameObject{
         else
             textureIndex=0;
         img=textures.get(textureIndex);
+    }
+    public void draw(){
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        shapeRenderer.rect(hitbox.x-width/2, hitbox.y-height/2, hitbox.width, hitbox.height);
+        shapeRenderer.end();
     }
 }

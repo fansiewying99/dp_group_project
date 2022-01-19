@@ -5,9 +5,9 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class VillagerStory extends Game {
-
-	SpriteBatch batch;
+	public SpriteBatch batch;
 	BitmapFont font;
+
 
 	public void create() {
 		batch = new SpriteBatch();
@@ -24,5 +24,4 @@ public class VillagerStory extends Game {
 		batch.dispose();
 		font.dispose();
 	}
-
 }
