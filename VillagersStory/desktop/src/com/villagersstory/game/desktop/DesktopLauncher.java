@@ -11,6 +11,6 @@ public class DesktopLauncher {
 		config.width = 1280;
 		config.height = 720;
 		config.foregroundFPS = 60;
-		new LwjglApplication( VillagerStory.getInstance() , config);
+		new LwjglApplication(new VillagerStory(), config);
 	}
 }
