@@ -3,6 +3,7 @@ package com.villagersstory.game.GameObjects.animal;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.villagersstory.game.GameClock;
+import com.villagersstory.game.GameObjects.NPC;
 import com.villagersstory.game.VillagerStory;
 import com.villagersstory.game.GameObjects.GameObject;
 
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Random;
 
 
-public class Cat extends GameObject implements Animal{
+public class Cat extends NPC implements Animal{
 
     Random rand = new Random();
     ArrayList<Integer> movement = new ArrayList<>();

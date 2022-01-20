@@ -7,8 +7,9 @@ import java.util.Random;
 import com.badlogic.gdx.graphics.Texture;
 import com.villagersstory.game.GameClock;
 import com.villagersstory.game.GameObjects.GameObject;
+import com.villagersstory.game.GameObjects.NPC;
 
-public class BirdAdapter implements Animal{
+public class BirdAdapter extends NPC implements Animal{
 	private final Bird bird;
 	
 	public BirdAdapter(Bird bird)

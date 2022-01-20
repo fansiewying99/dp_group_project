@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Human extends GameObject{
+public class Human extends NPC{
     public TextureRegion img;
     public int imgWidth;
     public int imgHeight;
