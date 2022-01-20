@@ -19,11 +19,10 @@ public class Human extends NPC{
     public Rectangle hitbox = new Rectangle();
     Cursor cursor = Cursor.getInstance();
 
-    Random rand = new Random();
+
 
     GameClock clock = GameClock.getInstance();
     double speed = 2;
-    int direction = rand.nextInt(4); //false = x
 
     int startTick = 0;
     int endTick=startTick+10;
@@ -126,16 +125,7 @@ public class Human extends NPC{
 
 
     }
-    public void checkBounds(){ //world bounds 1280x540
-        if(locationX<0)
-            direction = 0;
-        else if(locationX>1280)
-            direction = 1;
-        else if(locationY<0)
-            direction = 2;
-        else if(locationY>540)
-            direction = 3;
-    }
+
     public void loadTexture(List<TextureRegion> textures) {
         //List <Texture> textures=walkRightTextures;
         if(textureIndex < textures.size()-1) {

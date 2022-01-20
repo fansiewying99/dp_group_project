@@ -11,11 +11,9 @@ import com.villagersstory.game.GameObjects.GameObject;
 import com.villagersstory.game.GameObjects.NPC;
 
 public class Bird extends NPC {
-	Random rand = new Random();
     ArrayList<Integer> movement = new ArrayList<>();
     GameClock clock = GameClock.getInstance();
     double speed = 5;
-    int direction = 0; //false = x
 
     int startTick = 0;
     int endTick=startTick+1;
@@ -68,17 +66,7 @@ public class Bird extends NPC {
 		wait=initWait;
 				
 	}
-	
-	public void checkBounds(){ //world bounds 1280x540
-        if(locationX<0)
-            direction = 0;
-        else if(locationX>1280)
-            direction = 1;
-        else if(locationY<0)
-            direction = 2;
-        else if(locationY>540)
-            direction = 3;
-    }
+
 	
 	public void fly(){
         checkBounds();

@@ -14,11 +14,9 @@ import java.util.Random;
 
 public class Cat extends NPC implements Animal{
 
-    Random rand = new Random();
     ArrayList<Integer> movement = new ArrayList<>();
     GameClock clock = GameClock.getInstance();
     double speed = 1;
-    int direction = 0; //false = x
 
     int startTick = 0;
     int endTick=startTick+1;
@@ -161,16 +159,7 @@ public class Cat extends NPC implements Animal{
 		
 		return image;
 	}
-    public void checkBounds(){ //world bounds 1280x540
-        if(locationX<0)
-            direction = 0;
-        else if(locationX>1280)
-            direction = 1;
-        else if(locationY<0)
-            direction = 2;
-        else if(locationY>540)
-            direction = 3;
-    }
+
 	@Override
 	public int getLocationX() {
 		// TODO Auto-generated method stub
