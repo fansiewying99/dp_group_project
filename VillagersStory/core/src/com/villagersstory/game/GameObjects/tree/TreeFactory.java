@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class TreeFactory {
+    static TreeFactory treeFactory = new TreeFactory();
     Random rand = new Random();
     public ArrayList<Tree> trees = new ArrayList<>();
 
-    public TreeFactory() {
+    private TreeFactory() {
         createTree();
         generateTree();
     }
-
+    public static TreeFactory getInstance(){
+        return treeFactory;
+    }
     public void createTree(){
         trees.add(new TreeDead());
         trees.add(new TreeCoconut());
@@ -23,6 +26,9 @@ public class TreeFactory {
             trees.get(i).setLocationX(rand.nextInt(1280));
             trees.get(i).setLocationY(rand.nextInt(540));
         }
+
+    }
+    public void generateCoconut(){
         trees.get(1).generate();
     }
 }
