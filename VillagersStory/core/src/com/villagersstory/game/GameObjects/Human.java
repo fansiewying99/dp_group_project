@@ -67,8 +67,9 @@ public class Human extends NPC{
         shapeRenderer = new ShapeRenderer();
 
     }
-    public void walk(){
-        checkBounds();
+    @Override
+    protected void walk(){
+
         hitbox.setPosition(locationX, locationY);
         //if overlap with mouse cursor
         if(hitbox.overlaps(cursor.box)){

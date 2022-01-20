@@ -67,9 +67,12 @@ public class Bird extends NPC {
 				
 	}
 
-	
+	@Override
+	protected void walk(){
+		fly();
+	}
 	public void fly(){
-        checkBounds();
+
         if(endTick>=clock.tick) {
             switch(direction) {
 //                Gdx.graphics.getDeltaTime()

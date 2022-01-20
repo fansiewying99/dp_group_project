@@ -8,6 +8,6 @@ public interface Animal {
 	int getLocationY();
 	void setLocationX(int x);
 	void setLocationY(int y);
-	void walk();
+
 	String animalName();
 }

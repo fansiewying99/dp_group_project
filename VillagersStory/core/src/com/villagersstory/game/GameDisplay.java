@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.villagersstory.game.GameObjects.GameUI;
+import com.villagersstory.game.GameObjects.NPC;
 import com.villagersstory.game.GameObjects.house.House;
 import com.villagersstory.game.GameObjects.Human;
 
@@ -159,7 +160,7 @@ public class GameDisplay {
     }
     public void displayHumans(){
         for(int i=0; i<3; i++) {
-            human.get(i).walk();
+            human.get(i).move();
             game.batch.draw(human.get(i).img, human.get(i).locationX, human.get(i).locationY, human.get(i).imgWidth, human.get(i).imgHeight);
         }
     }
@@ -192,7 +193,10 @@ public class GameDisplay {
     }
     public void displayAnimal(){
         for(int i=0; i<animals.size(); i++) {
-            animals.get(i).walk();
+            NPC animalNPC = (NPC) animals.get(i);
+            if(animalNPC!= null)
+                animalNPC.move();
+
             game.batch.draw(animals.get(i).getImage(), animals.get(i).getLocationX(), animals.get(i).getLocationY(), 30, 30);
         }
         for(int i=0; i<birds.size(); i++) {

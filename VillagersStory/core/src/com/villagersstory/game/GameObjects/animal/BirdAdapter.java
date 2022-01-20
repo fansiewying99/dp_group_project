@@ -59,11 +59,8 @@ public class BirdAdapter extends NPC implements Animal{
 	}
 
 
-
 	@Override
-	public void walk() {
-		// TODO Auto-generated method stub
-		
-	}
+	protected void walk() {
 
+	}
 }

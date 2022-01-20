@@ -69,10 +69,10 @@ public class Dog extends NPC implements Animal{
 		initWait=10;
 		wait=initWait;
     }
-    
-    @Override
-    public void walk(){
-        checkBounds();
+
+	@Override
+	protected void walk(){
+
         if(endTick>=clock.tick) {
             switch(direction) {
 //                Gdx.graphics.getDeltaTime()

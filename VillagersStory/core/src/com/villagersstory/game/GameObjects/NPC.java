@@ -2,7 +2,7 @@ package com.villagersstory.game.GameObjects;
 
 import java.util.Random;
 
-public class NPC extends GameObject{
+public abstract class NPC extends GameObject{
 
     protected Random rand = new Random();
     protected int direction = rand.nextInt(4); //false = x
@@ -17,4 +17,10 @@ public class NPC extends GameObject{
         else if(locationY>540)
             direction = 3;
     }
+    //Template Method
+    public void move(){
+        checkBounds();
+        walk();  // primitive method
+    }
+    abstract protected void walk();
 }
