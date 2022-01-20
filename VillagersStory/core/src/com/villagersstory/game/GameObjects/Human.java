@@ -1,21 +1,18 @@
 package com.villagersstory.game.GameObjects;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.utils.Array;
 import com.villagersstory.game.Cursor;
 import com.villagersstory.game.GameClock;
-import org.w3c.dom.css.Rect;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class NPC extends GameObject{
+public class Human extends GameObject{
     public TextureRegion img;
     public int imgWidth;
     public int imgHeight;
@@ -41,7 +38,7 @@ public class NPC extends GameObject{
     final List<TextureRegion> walkUpTextures=new ArrayList<>();
     final List<TextureRegion> walkDownTextures=new ArrayList<>();
     ShapeRenderer shapeRenderer;
-    public NPC() {
+    public Human() {
 //        image = new Texture(Gdx.files.internal("Male.png"));
         initWait=15;//actual speed control
         wait=initWait;

@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.villagersstory.game.GameObjects.GameUI;
 import com.villagersstory.game.GameObjects.house.House;
-import com.villagersstory.game.GameObjects.NPC;
+import com.villagersstory.game.GameObjects.Human;
 
 import com.villagersstory.game.GameObjects.animal.Animal;
 import com.villagersstory.game.GameObjects.animal.Bird;
@@ -37,7 +37,7 @@ public class GameDisplay {
     GroundGrid ground = new GroundGrid();
 
     List<House> houses = new ArrayList<>();
-    List<NPC> npc = new ArrayList<>();
+    List<Human> human = new ArrayList<>();
 
     List<Animal> animals = new ArrayList<>();
     List<BirdAdapter> birds = new ArrayList<>();
@@ -66,7 +66,7 @@ public class GameDisplay {
         bg.height = 720;
 
         generateHouse();
-        generateNPC();
+        generateHumans();
 
         generateAnimal();
         trees = treeFactory.trees;
@@ -85,13 +85,13 @@ public class GameDisplay {
         displayTree();
 
         displayAnimal();
-        displayNPC();
+        displayHumans();
 
         displayTime();
 //
         game.batch.end();
         gameUI.render();
-        npc.get(0).draw();
+        human.get(0).draw();
         cursor.draw(GameScreen.camera);
     }
 
@@ -150,17 +150,17 @@ public class GameDisplay {
         }
     }
 
-    public void generateNPC(){
+    public void generateHumans(){
         for(int i=0; i<3; i++) {
-            npc.add(new NPC());
-            npc.get(i).locationX = rand.nextInt(1280);
-            npc.get(i).locationY = rand.nextInt(540);
+            human.add(new Human());
+            human.get(i).locationX = rand.nextInt(1280);
+            human.get(i).locationY = rand.nextInt(540);
         }
     }
-    public void displayNPC(){
+    public void displayHumans(){
         for(int i=0; i<3; i++) {
-            npc.get(i).move();
-            game.batch.draw(npc.get(i).img, npc.get(i).locationX, npc.get(i).locationY, npc.get(i).imgWidth, npc.get(i).imgHeight);
+            human.get(i).move();
+            game.batch.draw(human.get(i).img, human.get(i).locationX, human.get(i).locationY, human.get(i).imgWidth, human.get(i).imgHeight);
         }
     }
     public void generateAnimal(){
