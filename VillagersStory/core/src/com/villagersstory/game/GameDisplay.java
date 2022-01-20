@@ -159,7 +159,7 @@ public class GameDisplay {
     }
     public void displayHumans(){
         for(int i=0; i<3; i++) {
-            human.get(i).move();
+            human.get(i).walk();
             game.batch.draw(human.get(i).img, human.get(i).locationX, human.get(i).locationY, human.get(i).imgWidth, human.get(i).imgHeight);
         }
     }
