@@ -65,4 +65,8 @@ public class BirdAdapter implements Animal{
 		
 	}
 
+	@Override
+	public void setSpeed(double multiplier) {
+		bird.setSpeed(multiplier);
+	}
 }

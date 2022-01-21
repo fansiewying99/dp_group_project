@@ -2,9 +2,12 @@ package com.villagersstory.game;
 
 import com.badlogic.gdx.Gdx;
 
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.villagersstory.game.GameObjects.GameUI;
+import com.villagersstory.game.GameObjects.Sky;
+import com.villagersstory.game.GameObjects.WeatherFacade;
 import com.villagersstory.game.GameObjects.house.House;
 import com.villagersstory.game.GameObjects.NPC;
 
@@ -46,6 +49,9 @@ public class GameDisplay {
     TreeFactory treeFactory = TreeFactory.getInstance();
     List<Tree> trees;
 
+    Sky sky;
+    WeatherFacade weather;
+
     Random rand = new Random();
 
     GameUI gameUI = new GameUI();
@@ -66,17 +72,35 @@ public class GameDisplay {
         bg.width = 1280;
         bg.height = 720;
 
+        sky = new Sky();
         generateHouse();
         generateNPC();
 
         generateAnimal();
         trees = treeFactory.trees;
         ground.generateGrass();
+        weather = new WeatherFacade(game, sky, npc, animals, birds);
         gameUI.create();
 
     }
 
     public void render() {
+        //Render Sky color
+        Gdx.gl.glClearColor(sky.getColour().r, sky.getColour().g, sky.getColour().b, sky.getColour().a);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        game.batch.begin();
+        if (!sky.getColour().equals(Sky.rainy)){
+            displaySky();
+        }
+        if(Gdx.input.isKeyJustPressed(com.badlogic.gdx.Input.Keys.U))
+            weather.changeWeather("sunny");
+        if(Gdx.input.isKeyJustPressed(com.badlogic.gdx.Input.Keys.I))
+            weather.changeWeather("rainy");
+        if(Gdx.input.isKeyJustPressed(com.badlogic.gdx.Input.Keys.O))
+            weather.changeWeather("evening");
+        if(Gdx.input.isKeyJustPressed(com.badlogic.gdx.Input.Keys.P))
+            weather.changeWeather("dark");
         game.batch.draw(mountainImage, 0, 520);
 //        game.batch.draw(bgImage, bg.x, bg.y, bg.width, bg.height);
 
@@ -88,6 +112,9 @@ public class GameDisplay {
         displayAnimal();
         displayNPC();
 
+        if (sky.getColour().equals(Sky.rainy)){
+            displaySky();
+        }
         displayTime();
 //
         game.batch.end();
@@ -201,5 +228,10 @@ public class GameDisplay {
             birds.get(i).fly();
             game.batch.draw(birds.get(i).getImage(), birds.get(i).getLocationX(), birds.get(i).getLocationY(), 130, 130);
         }
+    }
+
+    public void displaySky(){
+        game.batch.draw(sky.getObjectOnSky().image, sky.getObjectOnSky().locationX, sky.getObjectOnSky().locationY,
+                sky.getObjectOnSky().width, sky.getObjectOnSky().height);
     }
 }

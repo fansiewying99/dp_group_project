@@ -25,6 +25,7 @@ public class NPC extends GameObject{
     Random rand = new Random();
 
     GameClock clock = GameClock.getInstance();
+    final double oriSpeed = 2;
     double speed = 2;
     int direction = rand.nextInt(4); //false = x
 
@@ -152,5 +153,9 @@ public class NPC extends GameObject{
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         shapeRenderer.rect(hitbox.x-width/2, hitbox.y-height/2, hitbox.width, hitbox.height);
         shapeRenderer.end();
+    }
+
+    public void setSpeed(double multiplier) {
+        speed = oriSpeed * multiplier;
     }
 }

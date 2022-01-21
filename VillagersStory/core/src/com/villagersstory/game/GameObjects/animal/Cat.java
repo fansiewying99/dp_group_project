@@ -16,6 +16,7 @@ public class Cat extends GameObject implements Animal{
     Random rand = new Random();
     ArrayList<Integer> movement = new ArrayList<>();
     GameClock clock = GameClock.getInstance();
+	double oriSpeed = 1;
     double speed = 1;
     int direction = 0; //false = x
 
@@ -200,5 +201,10 @@ public class Cat extends GameObject implements Animal{
 	public String animalName() {
 		// TODO Auto-generated method stub
 		return "Cat";
+	}
+
+	@Override
+	public void setSpeed(double multiplier) {
+		speed = oriSpeed * multiplier;
 	}
 }

@@ -14,6 +14,7 @@ public class Bird extends GameObject{
     ArrayList<Integer> movement = new ArrayList<>();
     GameClock clock = GameClock.getInstance();
     double speed = 5;
+	double oriSpeed = 5;
     int direction = 0; //false = x
 
     int startTick = 0;
@@ -145,5 +146,9 @@ public class Bird extends GameObject{
 	
 	String animalName() {
 		return "Bird";
+	}
+
+	public void setSpeed(double multiplier) {
+		speed = oriSpeed * multiplier;
 	}
 }
