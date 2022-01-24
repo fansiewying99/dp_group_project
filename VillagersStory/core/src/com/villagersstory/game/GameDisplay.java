@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+
 /**
  * generate method should share
  */
@@ -43,7 +44,7 @@ public class GameDisplay {
     List<Animal> animals = new ArrayList<>();
     List<BirdAdapter> birds = new ArrayList<>();
 
-    TreeFactory treeFactory = new TreeFactory();
+    TreeFactory treeFactory = TreeFactory.getInstance();
     List<Tree> trees;
 
     Random rand = new Random();
@@ -91,6 +92,7 @@ public class GameDisplay {
         displayTime();
 //
         game.batch.end();
+
         gameUI.render();
         human.get(0).draw();
         cursor.draw(GameScreen.camera);

@@ -47,13 +47,6 @@ public class TreeCoconut extends GameObject implements Tree{
     @Override
     public void generate() {
         fruits.add(new Coconut(locationX, locationY));
-        fruits.add(new Coconut(locationX, locationY));
-        fruits.add(new Coconut(locationX, locationY));
-        fruits.add(new Coconut(locationX, locationY));
-        fruits.add(new Coconut(locationX, locationY));
-        fruits.add(new Coconut(locationX, locationY));
-        fruits.add(new Coconut(locationX, locationY));
-        fruits.add(new Coconut(locationX, locationY));
     }
 
     @Override
