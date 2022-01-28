@@ -44,10 +44,6 @@ public class GameScreen implements Screen {
         // coordinate system specified by the camera.
         game.batch.setProjectionMatrix(camera.combined);
 
-        Gdx.gl.glClearColor(0/255f, 0/255f, 0/255f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        game.batch.begin();
 
         gameDisplay.render();//use GameDisplay class
 

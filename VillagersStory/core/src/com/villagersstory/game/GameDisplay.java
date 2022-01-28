@@ -2,6 +2,7 @@ package com.villagersstory.game;
 
 import com.badlogic.gdx.Gdx;
 
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.villagersstory.game.GameObjects.GameUI;
@@ -83,10 +84,12 @@ public class GameDisplay {
     }
 
     public void render() {
-        game.batch.draw(mountainImage, 0, 520);
+
 //        game.batch.draw(bgImage, bg.x, bg.y, bg.width, bg.height);
-
-
+        //Render Sky color
+        Gdx.gl.glClearColor(sky.getColour().r, sky.getColour().g, sky.getColour().b, sky.getColour().a);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        game.batch.begin();
         if (!sky.getColour().equals(Sky.rainy)){
             displaySky();
         }
@@ -98,7 +101,7 @@ public class GameDisplay {
             weather.changeWeather("evening");
         if(Gdx.input.isKeyJustPressed(com.badlogic.gdx.Input.Keys.P))
             weather.changeWeather("dark");
-
+        game.batch.draw(mountainImage, 0, 520);
 
         displayGround();
         displayHouse();
@@ -109,7 +112,9 @@ public class GameDisplay {
 
         displayTime();
 //
-
+        if (sky.getColour().equals(Sky.rainy)){
+            displaySky();
+        }
         game.batch.end();
 
         gameUI.render();
