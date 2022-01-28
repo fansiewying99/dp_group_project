@@ -36,14 +36,11 @@ public class GameUI{
         stage = new Stage();
         // skin is from gdx-skins (https://github.com/czyzby/gdx-skins)
         skin = new Skin(Gdx.files.internal("kenney-pixel/skin/skin.json"));
-//        skin = new Skin(Gdx.files.internal("shade/skin/uiskin.json"));
-
         bgCanvas = new Table(skin);
-//        bgCanvas.setBackground(skin.getDrawable("dialogDim"));
         bgCanvas.setBackground(skin.getDrawable("buttonUp"));
 //        bgCanvas.setSize(stage.getWidth(), stage.getHeight());
-        bgCanvas.setSize(150, 500);
-        bgCanvas.setPosition(0,100);
+        bgCanvas.setSize(150, 100);
+        bgCanvas.setPosition(0,620);
         bgCanvas.left();
 
         table = new Table(skin);
@@ -58,27 +55,52 @@ public class GameUI{
         menu.add(new TextButton("Trees", skin));
         menu.add(new TextButton("Animals", skin));
         menu.add(new TextButton("NPC", skin));
-
         for(int i=0; i<menu.size(); i++) {
             table.add(menu.get(i)).fillX();
         }
+        table.row();
+        //create buttons
+        npcButtons.add(new TextButton("Add Adult", skin));
+        npcButtons.add(new TextButton("Add Child", skin));
+
+        //add to temporary location
+        tempButtons = npcButtons;
+        for(int i=0; i<tempButtons.size(); i++) {
+            table.add(tempButtons.get(i));
+        }
+
+
 
         //add it to your stage
-        table.row();
-        table.add(button).fillX();
+//        table.row();
+//        table.add(button).fillX();
 //        bgCanvas.add(table);
 //        stage.addActor(table);
 //        bgCanvas.add(table).expand().bottom().fillX().height(50);
         bgCanvas.add(table).expand().top().fillX();
-
         stage.addActor(bgCanvas);
+
         button.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                System.out.println("I was clicked");
-                treeFactory.generateCoconut();
+            System.out.println("I was clicked");
+            treeFactory.generateCoconut();
             }
         });
+        for(int i=0; i<menu.size(); i++) {
+            final int finalI = i;
+            menu.get(i).addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    System.out.println("I was clicked");
+                    String str = menu.get(finalI).getText().toString();
+                    if(str.equals("Houses")){
+                        System.out.println("sup");
+                    }
+
+                }
+            });
+        }
 
         Gdx.input.setInputProcessor(stage);
     }
