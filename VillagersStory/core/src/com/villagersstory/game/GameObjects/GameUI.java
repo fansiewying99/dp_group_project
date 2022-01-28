@@ -14,13 +14,19 @@ import com.villagersstory.game.GameObjects.tree.TreeFactory;
 import java.util.ArrayList;
 
 public class GameUI{
-    Table mainTable;
+    Table bgCanvas;
     Table table;
     private Skin skin;
     private TextButton button;
     private Stage stage;
-    private ArrayList<TextButton> buttons;
     private ArrayList<TextButton> menu = new ArrayList<>();
+    private ArrayList<TextButton> tempButtons = new ArrayList<>();
+
+    private ArrayList<TextButton> npcButtons = new ArrayList<>();
+    private ArrayList<TextButton> treeButtons = new ArrayList<>();
+    private ArrayList<TextButton> skyButtons = new ArrayList<>();
+    private ArrayList<TextButton> animalButtons = new ArrayList<>();
+    private ArrayList<TextButton> houseButtons = new ArrayList<>();
 
     //items
     TreeFactory treeFactory = TreeFactory.getInstance();
@@ -28,17 +34,17 @@ public class GameUI{
     public void create() {
         //make a stage for your button to go on
         stage = new Stage();
-        //load a skin(a collection of styles for objects)
         // skin is from gdx-skins (https://github.com/czyzby/gdx-skins)
-//        skin = new Skin(Gdx.files.internal("kenney-pixel/skin/skin.json"));
-        skin = new Skin(Gdx.files.internal("shade/skin/uiskin.json"));
+        skin = new Skin(Gdx.files.internal("kenney-pixel/skin/skin.json"));
+//        skin = new Skin(Gdx.files.internal("shade/skin/uiskin.json"));
 
-        mainTable = new Table(skin);
-        mainTable.setBackground(skin.getDrawable("dialogDim"));
-//        mainTable.setSize(stage.getWidth(), stage.getHeight());
-        mainTable.setSize(150, 500);
-        mainTable.setPosition(0,100);
-        mainTable.left();
+        bgCanvas = new Table(skin);
+//        bgCanvas.setBackground(skin.getDrawable("dialogDim"));
+        bgCanvas.setBackground(skin.getDrawable("buttonUp"));
+//        bgCanvas.setSize(stage.getWidth(), stage.getHeight());
+        bgCanvas.setSize(150, 500);
+        bgCanvas.setPosition(0,100);
+        bgCanvas.left();
 
         table = new Table(skin);
 //        table.setPosition(0,600);
@@ -52,14 +58,7 @@ public class GameUI{
         menu.add(new TextButton("Trees", skin));
         menu.add(new TextButton("Animals", skin));
         menu.add(new TextButton("NPC", skin));
-        /**
-         * Creation:
-         * button -> factory(yo i want this) -> new object
-         *
-         * Edit:
-         * Arraylist(object.name) -> button -> factory(specific object) -> object.editMethod()
-         */
-        //add menu to stage
+
         for(int i=0; i<menu.size(); i++) {
             table.add(menu.get(i)).fillX();
         }
@@ -67,14 +66,12 @@ public class GameUI{
         //add it to your stage
         table.row();
         table.add(button).fillX();
-//        mainTable.add(table);
+//        bgCanvas.add(table);
 //        stage.addActor(table);
-//        mainTable.add(table).expand().bottom().fillX().height(50);
-        mainTable.add(table).expand().top().fillX();
+//        bgCanvas.add(table).expand().bottom().fillX().height(50);
+        bgCanvas.add(table).expand().top().fillX();
 
-        stage.addActor(mainTable);
-
-        // add a listener to your buttons so it does something when clicked
+        stage.addActor(bgCanvas);
         button.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -83,9 +80,7 @@ public class GameUI{
             }
         });
 
-        // set the sgae as the input processor so it will respond to clicks etc
         Gdx.input.setInputProcessor(stage);
-
     }
 
     public void render() {
