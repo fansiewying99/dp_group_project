@@ -2,86 +2,74 @@ package com.villagersstory.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class GameScreen implements Screen {
     final VillagerStory game;
-    Texture bgImage;
-    Rectangle bg;
-    OrthographicCamera camera;
-    public int day,hour,min;
-    GameClock clock;
+    GameDisplay gameDisplay;
+    GameClock gameClock;
+    GameInput gameInput;
+    GameCamera gameCamera;
+
+    static OrthographicCamera camera;
+    Vector3 cameraPos;
+
+    GameCamera camSettings = GameCamera.getInstance();
+    boolean camToggle = true;
 
     public GameScreen(final VillagerStory game) {
         this.game = game;
-
-        bgImage = new Texture(Gdx.files.internal("background ex.png"));
+        gameDisplay = new GameDisplay(game);
+        gameInput = new GameInput();
 
         // create the camera and the SpriteBatch
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 1280, 720);
-
-        // create a Rectangle to logically represent the bucket
-        bg = new Rectangle();
-
-        // the bottom screen edge
-        bg.width = 1280;
-        bg.height = 720;
-
-        clock = GameClock.getInstance();
-        try {
-            clock.startTime();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
+        camera.setToOrtho(false, 640, 360);
+//        camera.setToOrtho(false, 1280, 720);
+        cameraPos = new Vector3();
+//        camSettings.setResolution(camera, true);
     }
 
 
     @Override
     public void render(float delta) {
-        // clear the screen with a dark blue color. The
-        // arguments to clear are the red, green
-        // blue and alpha component in the range [0,1]
-        // of the color to be used to clear the screen.
+        //update in real time camera, background, images, input
         ScreenUtils.clear(0, 0, 0.2f, 1);
-
         // tell the camera to update its matrices.
         camera.update();
-
         // tell the SpriteBatch to render in the
         // coordinate system specified by the camera.
         game.batch.setProjectionMatrix(camera.combined);
 
-        // begin a new batch and draw the bucket and
-        // all drops
+        Gdx.gl.glClearColor(0/255f, 0/255f, 0/255f, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         game.batch.begin();
 
-        game.batch.draw(bgImage, bg.x, bg.y, bg.width, bg.height);
+        gameDisplay.render();//use GameDisplay class
 
-        game.font.draw(game.batch, "Time: ", 0, 700);
-        game.font.draw(game.batch, "Day: "+day, 0, 690);
-        game.font.draw(game.batch, "Hour: "+hour, 0, 680);
-        game.font.draw(game.batch, "Min: "+min, 0, 670);
+//        game.batch.end();
 
+        camera.position.lerp(cameraPos,0.1f);
 
-        game.batch.end();
+        gameInput.receiveInput(cameraPos, camera); //go to input class
 
-        day = clock.day;
-        hour = clock.hour;
-        min = clock.min;
+        camSettings.move(cameraPos, camera); //not used
 
+        if (Gdx.input.isKeyJustPressed(com.badlogic.gdx.Input.Keys.E)) {
+            camToggle=camSettings.setResolution(camera, camToggle);
+        }
+//        if (Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.F)) {
+//            bgImage = ColorChange.genTexture("background ex.png");
+//        }
 
     }
 
     @Override
-    public void resize(int width, int height) {
+    public void resize(int width, int height) { //zoom method
     }
 
     @Override
@@ -104,7 +92,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-        bgImage.dispose();
+//        bgImage.dispose();
     }
 
 }

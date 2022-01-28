@@ -4,8 +4,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameClock extends TimerTask {
-    private static GameClock gameClock = new GameClock();
+    private static final GameClock clock = new GameClock();
     public int day,hour,min;
+    public int tick;
     public int i = 0;
     static Timer timer;
 
@@ -16,18 +17,22 @@ public class GameClock extends TimerTask {
         day = 0;
         hour = 0;
         min = 0;
+        tick=0;
         TimerTask timerTask = getInstance();
         timer = new Timer(false);
-        timer.scheduleAtFixedRate(timerTask, 0, 5 * 200);
+        timer.scheduleAtFixedRate(timerTask, 0, 5 * 100);
     }
     public static GameClock getInstance(){
-        return gameClock;
+        return clock;
     }
 
     @Override
     public void run(){
         i++;
         min = i;
+
+        tick++;
+
         if (min == 60) {
             min=0;
             i=0;
