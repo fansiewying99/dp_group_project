@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.villagersstory.game.GameObjects.GameUI;
+import com.villagersstory.game.GameObjects.npc.Adult;
 import com.villagersstory.game.GameObjects.npc.NPC;
 import com.villagersstory.game.GameObjects.house.House;
 import com.villagersstory.game.GameObjects.npc.Human;
@@ -39,7 +40,7 @@ public class GameDisplay {
     GroundGrid ground = new GroundGrid();
 
     List<House> houses = new ArrayList<>();
-    List<Human> human = new ArrayList<>();
+    List<Adult> human = new ArrayList<>();
 
     List<Animal> animals = new ArrayList<>();
     List<BirdAdapter> birds = new ArrayList<>();
@@ -155,7 +156,7 @@ public class GameDisplay {
 
     public void generateHumans(){
         for(int i=0; i<3; i++) {
-            human.add(new Human());
+            human.add(new Adult());
             human.get(i).locationX = rand.nextInt(1280);
             human.get(i).locationY = rand.nextInt(540);
         }
