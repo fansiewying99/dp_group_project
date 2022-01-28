@@ -37,13 +37,17 @@ public class GameUI{
         // skin is from gdx-skins (https://github.com/czyzby/gdx-skins)
         skin = new Skin(Gdx.files.internal("kenney-pixel/skin/skin.json"));
         bgCanvas = new Table(skin);
-        bgCanvas.setBackground(skin.getDrawable("buttonUp"));
+//        bgCanvas.setBackground(skin.getDrawable("buttonUp"));
 //        bgCanvas.setSize(stage.getWidth(), stage.getHeight());
-        bgCanvas.setSize(150, 100);
-        bgCanvas.setPosition(0,620);
+        bgCanvas.setSize(350, 150);
+        bgCanvas.setPosition(0,570);
         bgCanvas.left();
+        bgCanvas.top();
 
         table = new Table(skin);
+        table.left();
+        table.top();
+        bgCanvas.top();
 //        table.setPosition(0,600);
 //        table.left();
 
@@ -56,26 +60,28 @@ public class GameUI{
         menu.add(new TextButton("Animals", skin));
         menu.add(new TextButton("NPC", skin));
         for(int i=0; i<menu.size(); i++) {
-            table.add(menu.get(i)).fillX();
+            bgCanvas.add(menu.get(i)).fillX();
         }
-        table.row();
+        bgCanvas.row();
+//        table.row();
         //create buttons
         npcButtons.add(new TextButton("Add Adult", skin));
         npcButtons.add(new TextButton("Add Child", skin));
 
-        //add to temporary location
-        tempButtons = npcButtons;
-        for(int i=0; i<tempButtons.size(); i++) {
-            table.add(tempButtons.get(i));
-        }
+        skyButtons.add(new TextButton("Clear", skin));
+        skyButtons.add(new TextButton("Rainy", skin));
+        skyButtons.add(new TextButton("Dusk", skin));
+        skyButtons.add(new TextButton("Night", skin));
 
+        treeButtons.add(new TextButton("Add Dead Tree", skin));
+        treeButtons.add(new TextButton("Add Coconut Tree", skin));
+        treeButtons.add(new TextButton("Add Oak Tree", skin));
+        treeButtons.add(new TextButton("Add Pine Tree", skin));
 
+        animalButtons.add(new TextButton("Add Cat", skin));
+        animalButtons.add(new TextButton("Add Dog", skin));
+        animalButtons.add(new TextButton("Add Dragon", skin));
 
-        //add it to your stage
-//        table.row();
-//        table.add(button).fillX();
-//        bgCanvas.add(table);
-//        stage.addActor(table);
 //        bgCanvas.add(table).expand().bottom().fillX().height(50);
         bgCanvas.add(table).expand().top().fillX();
         stage.addActor(bgCanvas);
@@ -92,10 +98,27 @@ public class GameUI{
             menu.get(i).addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
+                    table.clear();
                     System.out.println("I was clicked");
                     String str = menu.get(finalI).getText().toString();
-                    if(str.equals("Houses")){
+                    if(str.equals("Sky & Weather")){
+                        tempButtons = skyButtons;
+                    }
+                    else if(str.equals("Houses")){
                         System.out.println("sup");
+                    }
+                    else if(str.equals("Trees")){
+                        tempButtons = treeButtons;
+                    }
+                    else if(str.equals("Animals")){
+                        tempButtons = animalButtons;
+                    }
+                    else if(str.equals("NPC")){
+                        tempButtons = npcButtons;
+                    }
+                    for(int i=0; i<tempButtons.size(); i++) {
+                        table.add(tempButtons.get(i)).expand().bottom().fillX().width(120);
+                        table.row();
                     }
 
                 }
