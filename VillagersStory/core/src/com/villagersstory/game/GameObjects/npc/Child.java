@@ -12,15 +12,17 @@ import com.villagersstory.game.GameObjects.npc.NPC;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-public class Adult extends NPC {
+public class Child extends NPC {
     public TextureRegion img;
     public int imgWidth;
     public int imgHeight;
     public Rectangle hitbox = new Rectangle();
     Cursor cursor = Cursor.getInstance();
 
-    String[] randomImage = {"adult1.png", "adult2.png", "adult3.png", "adult4.png"};
+    Random rand = new Random();
+    String[] randomImage = {"child1.png", "child2.png", "child3.png", "child4.png"};
 
     GameClock clock = GameClock.getInstance();
     double speed = 2;
@@ -38,12 +40,11 @@ public class Adult extends NPC {
     final List<TextureRegion> walkUpTextures=new ArrayList<>();
     final List<TextureRegion> walkDownTextures=new ArrayList<>();
     ShapeRenderer shapeRenderer;
-    public Adult() {
+    public Child() {
 //        image = new Texture(Gdx.files.internal("Male.png"));
-        initWait=15;//actual speed control
+        initWait=2;//actual speed control
         wait=initWait;
 
-//        region = new TextureRegion(new Texture(Gdx.files.internal("npc/adult1.png")));
         region = new TextureRegion(new Texture(Gdx.files.internal("npc/"+randomImage[rand.nextInt(4)])));
         int frameWidth = region.getRegionWidth() / 3; //3x4
         int frameHeight = region.getRegionHeight() / 4;
