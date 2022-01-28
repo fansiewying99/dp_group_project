@@ -1,8 +1,10 @@
-package com.villagersstory.game.GameObjects;
+package com.villagersstory.game.GameObjects.npc;
+
+import com.villagersstory.game.GameObjects.GameObject;
 
 import java.util.Random;
 
-public abstract class NPC extends GameObject{
+public abstract class NPC extends GameObject {
 
     protected Random rand = new Random();
     protected int direction = rand.nextInt(4); //false = x

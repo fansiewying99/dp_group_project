@@ -5,9 +5,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.villagersstory.game.GameObjects.GameUI;
-import com.villagersstory.game.GameObjects.NPC;
+import com.villagersstory.game.GameObjects.npc.NPC;
 import com.villagersstory.game.GameObjects.house.House;
-import com.villagersstory.game.GameObjects.Human;
+import com.villagersstory.game.GameObjects.npc.Human;
 
 import com.villagersstory.game.GameObjects.animal.Animal;
 import com.villagersstory.game.GameObjects.animal.Bird;

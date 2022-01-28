@@ -1,4 +1,4 @@
-package com.villagersstory.game.GameObjects;
+package com.villagersstory.game.GameObjects.npc;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -7,12 +7,12 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.villagersstory.game.Cursor;
 import com.villagersstory.game.GameClock;
+import com.villagersstory.game.GameObjects.npc.NPC;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-public class Human extends NPC{
+public class Human extends NPC {
     public TextureRegion img;
     public int imgWidth;
     public int imgHeight;

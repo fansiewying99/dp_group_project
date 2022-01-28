@@ -2,13 +2,11 @@ package com.villagersstory.game.GameObjects.animal;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.villagersstory.game.GameClock;
-import com.villagersstory.game.GameObjects.GameObject;
-import com.villagersstory.game.GameObjects.NPC;
+import com.villagersstory.game.GameObjects.npc.NPC;
 
 public class Bird extends NPC {
     ArrayList<Integer> movement = new ArrayList<>();

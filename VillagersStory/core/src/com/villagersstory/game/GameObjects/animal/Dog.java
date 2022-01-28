@@ -3,13 +3,10 @@ package com.villagersstory.game.GameObjects.animal;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.villagersstory.game.GameClock;
-import com.villagersstory.game.GameObjects.NPC;
-import com.villagersstory.game.VillagerStory;
-import com.villagersstory.game.GameObjects.GameObject;
+import com.villagersstory.game.GameObjects.npc.NPC;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 
 public class Dog extends NPC implements Animal{
