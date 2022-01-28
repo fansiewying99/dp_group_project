@@ -38,10 +38,14 @@ public class Adult extends NPC {
     final List<TextureRegion> walkUpTextures=new ArrayList<>();
     final List<TextureRegion> walkDownTextures=new ArrayList<>();
     ShapeRenderer shapeRenderer;
+
+    //kaibin
+    final double oriSpeed = 2;
     public Adult() {
 //        image = new Texture(Gdx.files.internal("Male.png"));
         initWait=15;//actual speed control
         wait=initWait;
+
 
 //        region = new TextureRegion(new Texture(Gdx.files.internal("npc/adult1.png")));
         region = new TextureRegion(new Texture(Gdx.files.internal("npc/"+randomImage[rand.nextInt(4)])));
@@ -144,5 +148,8 @@ public class Adult extends NPC {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         shapeRenderer.rect(hitbox.x-width/2, hitbox.y-height/2, hitbox.width, hitbox.height);
         shapeRenderer.end();
+    }
+    public void setSpeed(double multiplier) {
+        speed = oriSpeed * multiplier;
     }
 }

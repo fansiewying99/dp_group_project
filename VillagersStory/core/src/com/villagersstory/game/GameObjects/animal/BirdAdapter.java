@@ -57,4 +57,8 @@ public class BirdAdapter extends NPC implements Animal{
 	protected void walk() {
 
 	}
+	@Override
+	public void setSpeed(double multiplier) {
+		bird.setSpeed(multiplier);
+	}
 }

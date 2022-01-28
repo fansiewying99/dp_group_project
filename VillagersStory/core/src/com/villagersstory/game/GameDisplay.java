@@ -5,6 +5,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.villagersstory.game.GameObjects.GameUI;
+import com.villagersstory.game.GameObjects.Sky;
+import com.villagersstory.game.GameObjects.WeatherFacade;
 import com.villagersstory.game.GameObjects.npc.Adult;
 import com.villagersstory.game.GameObjects.npc.NPC;
 import com.villagersstory.game.GameObjects.house.House;
@@ -47,6 +49,8 @@ public class GameDisplay {
 
     TreeFactory treeFactory = TreeFactory.getInstance();
     List<Tree> trees;
+    Sky sky;
+    WeatherFacade weather;
 
     Random rand = new Random();
 
@@ -67,23 +71,36 @@ public class GameDisplay {
         // the bottom screen edge
         bg.width = 1280;
         bg.height = 720;
-
+        ground.generateGrass();
         generateHouse();
         generateHumans();
 
         generateAnimal();
         trees = treeFactory.trees;
-        ground.generateGrass();
         gameUI.create();
-
+        sky = new Sky();
+        weather = new WeatherFacade(game, sky, human, animals, birds);
     }
 
     public void render() {
         game.batch.draw(mountainImage, 0, 520);
 //        game.batch.draw(bgImage, bg.x, bg.y, bg.width, bg.height);
 
+
+        if (!sky.getColour().equals(Sky.rainy)){
+            displaySky();
+        }
+        if(Gdx.input.isKeyJustPressed(com.badlogic.gdx.Input.Keys.U))
+            weather.changeWeather("sunny");
+        if(Gdx.input.isKeyJustPressed(com.badlogic.gdx.Input.Keys.I))
+            weather.changeWeather("rainy");
+        if(Gdx.input.isKeyJustPressed(com.badlogic.gdx.Input.Keys.O))
+            weather.changeWeather("evening");
+        if(Gdx.input.isKeyJustPressed(com.badlogic.gdx.Input.Keys.P))
+            weather.changeWeather("dark");
+
+
         displayGround();
-//
         displayHouse();
         displayTree();
 
@@ -92,6 +109,7 @@ public class GameDisplay {
 
         displayTime();
 //
+
         game.batch.end();
 
         gameUI.render();
@@ -206,5 +224,9 @@ public class GameDisplay {
             birds.get(i).fly();
             game.batch.draw(birds.get(i).getImage(), birds.get(i).getLocationX(), birds.get(i).getLocationY(), 130, 130);
         }
+    }
+    public void displaySky(){
+        game.batch.draw(sky.getObjectOnSky().image, sky.getObjectOnSky().locationX, sky.getObjectOnSky().locationY,
+                sky.getObjectOnSky().width, sky.getObjectOnSky().height);
     }
 }

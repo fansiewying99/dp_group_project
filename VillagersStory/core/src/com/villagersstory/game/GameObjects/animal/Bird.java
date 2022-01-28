@@ -12,6 +12,7 @@ public class Bird extends NPC {
     ArrayList<Integer> movement = new ArrayList<>();
     GameClock clock = GameClock.getInstance();
     double speed = 5;
+	double oriSpeed = 5;
 
     int startTick = 0;
     int endTick=startTick+1;
@@ -135,5 +136,8 @@ public class Bird extends NPC {
 	
 	String animalName() {
 		return "Bird";
+	}
+	public void setSpeed(double multiplier) {
+		speed = oriSpeed * multiplier;
 	}
 }

@@ -10,4 +10,5 @@ public interface Animal {
 	void setLocationY(int y);
 
 	String animalName();
+	void setSpeed(double multiplier);
 }
