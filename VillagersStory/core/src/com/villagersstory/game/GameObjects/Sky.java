@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.villagersstory.game.GameClock;
 
 import java.util.Random;
 
@@ -11,6 +12,7 @@ public class Sky {
     private Color colour;
     private GameObject objectOnSky = new GameObject();
     private Random rand = new Random();
+    private GameClock clock = GameClock.getInstance();
 
     public static final Color sunny = new Color(39/255f, 204/255f, 245/255f, 204/255f); // light blue
     public static final Color rainy = new Color(22/255f,71/255f,163/255f,204/255f);//greyish blue
@@ -37,7 +39,8 @@ public class Sky {
         }
         else if (weather.toLowerCase().equals("rainy")){
             colour = rainy;
-            objectOnSky.image = new Texture(Gdx.files.internal("sky/rain_drops-01.png"));
+            int time = clock.tick;
+            objectOnSky.image = new Texture(Gdx.files.internal("sky/rain_drops-0"+(time % 4 +1)+".png"));
             objectOnSky.width = 1280;
             objectOnSky.height = 720;
             objectOnSky.locationX = 0;

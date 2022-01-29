@@ -114,14 +114,6 @@ public class GameDisplay {
         if (!sky.getColour().equals(Sky.rainy)){
             displaySky();
         }
-        if(Gdx.input.isKeyJustPressed(com.badlogic.gdx.Input.Keys.U))
-            weather.changeWeather("sunny");
-        if(Gdx.input.isKeyJustPressed(com.badlogic.gdx.Input.Keys.I))
-            weather.changeWeather("rainy");
-        if(Gdx.input.isKeyJustPressed(com.badlogic.gdx.Input.Keys.O))
-            weather.changeWeather("evening");
-        if(Gdx.input.isKeyJustPressed(com.badlogic.gdx.Input.Keys.P))
-            weather.changeWeather("dark");
         game.batch.draw(mountainImage, 0, 520);
 
         displayGround();
@@ -131,11 +123,11 @@ public class GameDisplay {
         displayAnimal();
         displayHumans();
 
-        displayTime();
-//
         if (sky.getColour().equals(Sky.rainy)){
             displaySky();
         }
+        displayTime();
+//
         game.batch.end();
         renderUI();
     }
@@ -252,6 +244,8 @@ public class GameDisplay {
         }
     }
     public void displaySky(){
+        if (sky.getColour().equals(Sky.rainy))
+            weather.changeWeather("rainy");
         game.batch.draw(sky.getObjectOnSky().image, sky.getObjectOnSky().locationX, sky.getObjectOnSky().locationY,
                 sky.getObjectOnSky().width, sky.getObjectOnSky().height);
     }
