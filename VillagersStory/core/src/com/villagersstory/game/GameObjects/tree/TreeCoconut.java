@@ -60,28 +60,4 @@ public class TreeCoconut extends GameObject implements Tree{
     }
 
 
-    public Texture combineTextures(Texture texture1, Texture texture2) {
-        if(!texture1.getTextureData().isPrepared())
-            texture1.getTextureData().prepare();
-        Pixmap pixmap1 = texture1.getTextureData().consumePixmap();
-        if(!texture2.getTextureData().isPrepared())
-            texture2.getTextureData().prepare();
-        Pixmap pixmap2 = texture2.getTextureData().consumePixmap();
-//        pixmap1.drawPixmap(pixmap2, 0, 0);
-
-        //randomized location of leaves
-        int x = (pixmap1.getWidth() / 2) - rand.nextInt((pixmap1.getWidth() / 4) - pixmap2.getWidth());
-        int y = (pixmap1.getHeight() / 2) - rand.nextInt((pixmap1.getHeight() / 2) - pixmap2.getHeight());
-//        int x = 0;
-//        int y = 0;
-
-        pixmap1.drawPixmap(pixmap2, x, y);
-        Texture textureResult = new Texture(pixmap1);
-
-        pixmap1.dispose();//must dispose
-        pixmap2.dispose();
-
-//        textureResult.getTextureData().disposePixmap();
-        return textureResult;
-    }
 }

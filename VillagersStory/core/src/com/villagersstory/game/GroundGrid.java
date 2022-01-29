@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class GroundGrid {
+    private static GroundGrid groundGrid = new GroundGrid();
     Random rand = new Random();
     int width=1280, height=600;
     int tileSize = 32;
@@ -17,6 +18,12 @@ public class GroundGrid {
     ArrayList<Texture> leaf = new ArrayList<>();
     //    int[][] location = new
     //grass tile 32x32
+    private GroundGrid(){
+
+    }
+    public static GroundGrid getInstance(){
+        return groundGrid;
+    }
     public void setWidthHeight(int width, int height){
         this.width = width;
         this.height = height;

@@ -48,7 +48,7 @@ public class GameDisplay {
     Texture mountainImage;
     Rectangle bg;
 
-    GroundGrid ground = new GroundGrid();
+    GroundGrid ground = GroundGrid.getInstance();
 
     List<House> houses = new ArrayList<>();
     List<NPC> human = new ArrayList<>();
