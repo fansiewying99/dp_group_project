@@ -50,6 +50,7 @@ public class GameDisplay {
     Texture mountainImage;
     Rectangle bg;
     Music townMusic = Gdx.audio.newMusic(Gdx.files.internal("TownTheme.mp3"));
+    Music rainMusic = Gdx.audio.newMusic(Gdx.files.internal("Rain.mp3"));
     GroundGrid ground = GroundGrid.getInstance();
 
     List<House> houses = new ArrayList<>();
@@ -90,6 +91,8 @@ public class GameDisplay {
         }
         townMusic.setLooping(true);
         townMusic.setVolume(0.05f);
+        rainMusic.setVolume(0.1f);
+        rainMusic.setLooping(true);
         mountainImage = new Texture(Gdx.files.internal("sky/mountains.png"));
         bg = new Rectangle();
         // the bottom screen edge
@@ -226,10 +229,16 @@ public class GameDisplay {
         }
     }
     public void displaySky(){
-        if (sky.getColour().equals(Sky.rainy))
-            weather.changeWeather("rainy");
         game.batch.draw(sky.getObjectOnSky().image, sky.getObjectOnSky().locationX, sky.getObjectOnSky().locationY,
                 sky.getObjectOnSky().width, sky.getObjectOnSky().height);
+        if (sky.getColour().equals(Sky.rainy)) {
+            if(!rainMusic.isPlaying())
+                rainMusic.play();
+            weather.changeWeather("rainy");
+        } else {
+            if(rainMusic.isPlaying())
+                rainMusic.stop();
+        }
     }
     public void createUI() {
         //make a stage for your button to go on
