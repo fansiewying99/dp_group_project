@@ -36,14 +36,10 @@ public class TreeOak extends GameObject implements Tree{
     }
     @Override
     public void generate() {
-
     }
-
     @Override
     public void reactWind() {
-
     }
-
     @Override
     public ArrayList<Fruit> dropFruit() {
         return null;

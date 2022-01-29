@@ -2,6 +2,8 @@ package com.villagersstory.game;
 
 import com.badlogic.gdx.Gdx;
 
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -47,7 +49,7 @@ public class GameDisplay {
     Texture bgImage;
     Texture mountainImage;
     Rectangle bg;
-
+    Music townMusic = Gdx.audio.newMusic(Gdx.files.internal("TownTheme.mp3"));
     GroundGrid ground = GroundGrid.getInstance();
 
     List<House> houses = new ArrayList<>();
@@ -86,7 +88,8 @@ public class GameDisplay {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-//        bgImage = new Texture(Gdx.files.internal("background ex.png"));
+        townMusic.setLooping(true);
+        townMusic.setVolume(0.05f);
         mountainImage = new Texture(Gdx.files.internal("sky/mountains.png"));
         bg = new Rectangle();
         // the bottom screen edge
@@ -94,19 +97,12 @@ public class GameDisplay {
         bg.height = 720;
         ground.generateGrass();
 
-//        generateHouse();
-//        generateHumans();
-//        generateAnimal();
-//        trees = treeFactory.trees;
-
         createUI();
         sky = new Sky();
         weather = new WeatherFacade(game, sky, human, animals, birds);
     }
 
     public void render() {
-
-//        game.batch.draw(bgImage, bg.x, bg.y, bg.width, bg.height);
         //Render Sky color
         Gdx.gl.glClearColor(sky.getColour().r, sky.getColour().g, sky.getColour().b, sky.getColour().a);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -127,33 +123,23 @@ public class GameDisplay {
             displaySky();
         }
         displayTime();
-//
         game.batch.end();
         renderUI();
     }
 
     public void sound(){
-
+        townMusic.play();
     }
     public void setVolume(){
 
     }
 
     public void displayTime(){
-        game.font.draw(game.batch, "Day: "+clock.day, 0, 690);
-        game.font.draw(game.batch, "Hour: "+clock.hour, 0, 680);
-        game.font.draw(game.batch, "Min: "+clock.min, 0, 670);
-
+        game.font.draw(game.batch, "Day:  "+clock.day, 1140, 705);
+        game.font.draw(game.batch, "Time: "+String.format("%02d", clock.hour), 1140, 690);
+        game.font.draw(game.batch, ": "+String.format("%02d", clock.min), 1200, 690);
     }
     public void generateHouse(){
-    	/*FileHandle dirHandle;
-
-		dirHandle = Gdx.files.internal("../core/assets");
-		
-		for (FileHandle entry: dirHandle.list()) {
-			System.out.println(entry);
-		}*/
-
         for(int i=0; i<5; i++) {
             houses.add(new House());
             houses.get(i).locationX = rand.nextInt(1280);
@@ -166,8 +152,6 @@ public class GameDisplay {
                 game.batch.draw(ground.grid[i][j], j*ground.tileSize, i*ground.tileSize, ground.tileSize, ground.tileSize);
             }
         }
-//        for(int i=0; i<ground.leaf.size(); i++)
-//            game.batch.draw(ground.leaf.get(i), i*ground.tileSize, i*ground.tileSize, 24,24);
     }
     private void displayHouse() {
         for(int i=0; i<houses.size(); i++) {
@@ -208,8 +192,6 @@ public class GameDisplay {
     	for(int i=0; i<10; i++) {
     		int ranInt=rand.nextInt(3)+1;
     		System.out.println(ranInt);
-    		//int catnum=0;
-    		//int birdnum=0;
     		
     		if(ranInt==2) {
     			BirdAdapter bird=new BirdAdapter(new Bird());
@@ -302,13 +284,17 @@ public class GameDisplay {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     table.clear();
+//                    for(int i=0; i<tempButtons.size(); i++) {
+//                        tempButtons.get(i).clearListeners();
+//                    }
+
                     System.out.println("I was clicked");
                     String str = menu.get(finalI).getText().toString();
                     if(str.equals("Sky & Weather")){
                         tempButtons = skyButtons;
                     }
                     else if(str.equals("Houses")){
-                        System.out.println("sup");
+                        System.out.println("empty");
                     }
                     else if(str.equals("Trees")){
                         tempButtons = treeButtons;
@@ -323,54 +309,48 @@ public class GameDisplay {
                         table.add(tempButtons.get(i)).expand().bottom().fillX().width(120);
                         table.row();
                         final int finalJ = i;
-                        tempButtons.get(i).addListener(new ChangeListener() {
-                            @Override
-                            public void changed(ChangeEvent event, Actor actor) {
-                                System.out.println("temp buttons");
-                                String str = tempButtons.get(finalJ).getText().toString();
-                                if(str.equals("Sunny")){
-                                    weather.changeWeather("sunny");
-                                }
-                                else if(str.equals("Rainy")){
-                                    weather.changeWeather("rainy");
-                                }
-                                else if(str.equals("Dusk")){
-                                    weather.changeWeather("evening");
-                                }
-                                else if(str.equals("Night")){
-                                    weather.changeWeather("dark");
-                                }
-                                else if(str.equals("Add Adult")){
-                                    generateHumans("adult");
-                                }
-                                else if(str.equals("Add Child")){
-                                    generateHumans("child");
-                                }
-                                else if(str.equals("Add Dead Tree")){
-                                    trees.add(treeFactory.createTree("dead"));
-                                }
-                                else if(str.equals("Add Coconut Tree")){
-                                    trees.add(treeFactory.createTree("coconut"));
-                                }
-                                else if(str.equals("Add Oak Tree")){
-                                    trees.add(treeFactory.createTree("oak"));
-                                }
-                                else if(str.equals("Add Pine Tree")){
-                                    trees.add(treeFactory.createTree("pine"));
-                                }
-                                else if(str.equals("Add Cat")){
-                                    //
-                                }
-                                else if(str.equals("Add Dog")){
-                                    //
-                                }
-                                else if(str.equals("Add Dragon")){
-                                    //
+
+                        if(tempButtons.get(i).getListeners().size <= 1 ) {
+                            tempButtons.get(i).addListener(new ChangeListener() {
+                                @Override
+                                public void changed(ChangeEvent event, Actor actor) {
+                                    System.out.println("temp buttons");
+                                    String str = tempButtons.get(finalJ).getText().toString();
+                                    if (str.equals("Sunny")) {
+                                        weather.changeWeather("sunny");
+                                    } else if (str.equals("Rainy")) {
+                                        weather.changeWeather("rainy");
+                                    } else if (str.equals("Dusk")) {
+                                        weather.changeWeather("evening");
+                                    } else if (str.equals("Night")) {
+                                        weather.changeWeather("dark");
+                                    } else if (str.equals("Add Adult")) {
+                                        generateHumans("adult");
+                                    } else if (str.equals("Add Child")) {
+                                        generateHumans("child");
+                                    } else if (str.equals("Add Dead Tree")) {
+                                        trees.add(treeFactory.createTree("dead"));
+                                    } else if (str.equals("Add Coconut Tree")) {
+                                        trees.add(treeFactory.createTree("coconut"));
+                                    } else if (str.equals("Add Oak Tree")) {
+                                        trees.add(treeFactory.createTree("oak"));
+                                    } else if (str.equals("Add Pine Tree")) {
+                                        trees.add(treeFactory.createTree("pine"));
+                                    } else if (str.equals("Add Cat")) {
+                                        //
+                                    } else if (str.equals("Add Dog")) {
+                                        //
+                                    } else if (str.equals("Add Dragon")) {
+                                        //
+                                    }
+
                                 }
 
-                            }
-                        });
+                            });
+                        }
+
                     }
+                    System.out.println(tempButtons.size());
                 }
             });
         }

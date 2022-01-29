@@ -72,6 +72,7 @@ public class GameScreen implements Screen {
     public void show() {
         // start the playback of the background music
         // when the screen is shown
+        gameDisplay.sound();
     }
 
     @Override

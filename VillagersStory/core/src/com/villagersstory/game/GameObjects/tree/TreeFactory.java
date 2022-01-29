@@ -9,8 +9,6 @@ public class TreeFactory {
     public ArrayList<Tree> trees = new ArrayList<>();
 
     private TreeFactory() {
-//        createTree();
-//        generateTree();
     }
     public static TreeFactory getInstance(){
         return treeFactory;
@@ -29,15 +27,5 @@ public class TreeFactory {
         trees.get(trees.size()-1).setLocationY(rand.nextInt(540));
 
         return trees.get(trees.size()-1);
-    }
-    public void generateTree(){
-        for(int i=0; i<trees.size(); i++){
-            trees.get(i).setLocationX(rand.nextInt(1280));
-            trees.get(i).setLocationY(rand.nextInt(540));
-        }
-
-    }
-    public void generateCoconut(){
-        trees.get(1).generate();
     }
 }
