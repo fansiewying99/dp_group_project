@@ -15,9 +15,6 @@ import java.util.List;
 import java.util.Random;
 
 public class Child extends NPC {
-    public TextureRegion img;
-    public int imgWidth;
-    public int imgHeight;
     public Rectangle hitbox = new Rectangle();
     Cursor cursor = Cursor.getInstance();
 
@@ -26,7 +23,7 @@ public class Child extends NPC {
 
     GameClock clock = GameClock.getInstance();
     double speed = 2;
-
+    double oriSpeed = 2;
     int startTick = 0;
     int endTick=startTick+10;
     public float wait;
@@ -68,18 +65,12 @@ public class Child extends NPC {
         walkUpTextures.add(new TextureRegion(region, 2 * frameWidth, 3 * frameHeight, frameWidth, frameHeight));
 
         img = walkDownTextures.get(1);
-        hitbox.setSize(imgWidth, imgHeight);
-        shapeRenderer = new ShapeRenderer();
+
+
 
     }
     @Override
     protected void walk(){
-
-        hitbox.setPosition(locationX, locationY);
-        //if overlap with mouse cursor
-        if(hitbox.overlaps(cursor.box)){
-            System.out.println("NPC overlap cursor");
-        }
 
         if(endTick>=clock.tick) {
             switch(direction) {
@@ -130,6 +121,11 @@ public class Child extends NPC {
         }
 
 
+    }
+
+    @Override
+    public void setSpeed(double multiplier) {
+        speed = oriSpeed * multiplier;
     }
 
     public void loadTexture(List<TextureRegion> textures) {

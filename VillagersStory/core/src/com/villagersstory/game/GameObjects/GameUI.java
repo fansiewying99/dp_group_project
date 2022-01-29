@@ -17,7 +17,6 @@ public class GameUI{
     Table bgCanvas;
     Table table;
     private Skin skin;
-    private TextButton button;
     private Stage stage;
     private ArrayList<TextButton> menu = new ArrayList<>();
     private ArrayList<TextButton> tempButtons = new ArrayList<>();
@@ -29,16 +28,14 @@ public class GameUI{
     private ArrayList<TextButton> houseButtons = new ArrayList<>();
 
     //items
-    TreeFactory treeFactory = TreeFactory.getInstance();
 
-    public void create() {
+
+    public void createUI() {
         //make a stage for your button to go on
         stage = new Stage();
         // skin is from gdx-skins (https://github.com/czyzby/gdx-skins)
         skin = new Skin(Gdx.files.internal("kenney-pixel/skin/skin.json"));
         bgCanvas = new Table(skin);
-//        bgCanvas.setBackground(skin.getDrawable("buttonUp"));
-//        bgCanvas.setSize(stage.getWidth(), stage.getHeight());
         bgCanvas.setSize(350, 150);
         bgCanvas.setPosition(0,570);
         bgCanvas.left();
@@ -48,10 +45,6 @@ public class GameUI{
         table.left();
         table.top();
         bgCanvas.top();
-//        table.setPosition(0,600);
-//        table.left();
-
-        button = new TextButton("Add Coconut", skin);
 
         //create menu
         menu.add(new TextButton("Sky & Weather", skin));
@@ -63,7 +56,6 @@ public class GameUI{
             bgCanvas.add(menu.get(i)).fillX();
         }
         bgCanvas.row();
-//        table.row();
         //create buttons
         npcButtons.add(new TextButton("Add Adult", skin));
         npcButtons.add(new TextButton("Add Child", skin));
@@ -82,17 +74,9 @@ public class GameUI{
         animalButtons.add(new TextButton("Add Dog", skin));
         animalButtons.add(new TextButton("Add Dragon", skin));
 
-//        bgCanvas.add(table).expand().bottom().fillX().height(50);
         bgCanvas.add(table).expand().top().fillX();
         stage.addActor(bgCanvas);
 
-        button.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                System.out.println("I was clicked");
-                treeFactory.generateCoconut();
-            }
-        });
         for(int i=0; i<menu.size(); i++) {
             final int finalI = i;
             menu.get(i).addListener(new ChangeListener() {
@@ -119,8 +103,55 @@ public class GameUI{
                     for(int i=0; i<tempButtons.size(); i++) {
                         table.add(tempButtons.get(i)).expand().bottom().fillX().width(120);
                         table.row();
-                    }
+                        final int finalJ = i;
+                        tempButtons.get(i).addListener(new ChangeListener() {
+                            @Override
+                            public void changed(ChangeEvent event, Actor actor) {
+                                System.out.println("temp buttons");
+                                String str = tempButtons.get(finalJ).getText().toString();
+                                if(str.equals("Clear")){
+                                    System.out.println("clear");
+                                }
+                                else if(str.equals("Rainy")){
+                                    tempButtons = npcButtons;
+                                }
+                                else if(str.equals("Dusk")){
+                                    tempButtons = npcButtons;
+                                }
+                                else if(str.equals("Night")){
+                                    tempButtons = npcButtons;
+                                }
+                                else if(str.equals("Add Adult")){
+                                    tempButtons = npcButtons;
+                                }
+                                else if(str.equals("Add Child")){
+                                    tempButtons = npcButtons;
+                                }
+                                else if(str.equals("Add Dead Tree")){
+                                    tempButtons = npcButtons;
+                                }
+                                else if(str.equals("Add Coconut Tree")){
+                                    tempButtons = npcButtons;
+                                }
+                                else if(str.equals("Add Oak Tree")){
+                                    tempButtons = npcButtons;
+                                }
+                                else if(str.equals("Add Pine Tree")){
+                                    tempButtons = npcButtons;
+                                }
+                                else if(str.equals("Add Cat")){
+                                    tempButtons = npcButtons;
+                                }
+                                else if(str.equals("Add Dog")){
+                                    tempButtons = npcButtons;
+                                }
+                                else if(str.equals("Add Dragon")){
+                                    tempButtons = npcButtons;
+                                }
 
+                            }
+                        });
+                    }
                 }
             });
         }
@@ -128,7 +159,7 @@ public class GameUI{
         Gdx.input.setInputProcessor(stage);
     }
 
-    public void render() {
+    public void renderUI() {
         // tell stage to do action and then draw itself
         stage.draw();
         stage.act();

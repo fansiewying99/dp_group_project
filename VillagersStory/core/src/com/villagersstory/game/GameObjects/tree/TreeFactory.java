@@ -9,17 +9,26 @@ public class TreeFactory {
     public ArrayList<Tree> trees = new ArrayList<>();
 
     private TreeFactory() {
-        createTree();
-        generateTree();
+//        createTree();
+//        generateTree();
     }
     public static TreeFactory getInstance(){
         return treeFactory;
     }
-    public void createTree(){
-        trees.add(new TreeDead());
-        trees.add(new TreeCoconut());
-        trees.add(new TreePine());
-        trees.add(new TreeOak());
+    public Tree createTree(String treeType){
+        if(treeType.equals("dead"))
+            trees.add(new TreeDead());
+        else if(treeType.equals("coconut"))
+            trees.add(new TreeCoconut());
+        else if(treeType.equals("pine"))
+            trees.add(new TreePine());
+        else if(treeType.equals("oak"))
+            trees.add(new TreeOak());
+
+        trees.get(trees.size()-1).setLocationX(rand.nextInt(1280));
+        trees.get(trees.size()-1).setLocationY(rand.nextInt(540));
+
+        return trees.get(trees.size()-1);
     }
     public void generateTree(){
         for(int i=0; i<trees.size(); i++){

@@ -14,9 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Adult extends NPC {
-    public TextureRegion img;
-    public int imgWidth;
-    public int imgHeight;
     public Rectangle hitbox = new Rectangle();
     Cursor cursor = Cursor.getInstance();
 
@@ -46,7 +43,6 @@ public class Adult extends NPC {
         initWait=15;//actual speed control
         wait=initWait;
 
-
 //        region = new TextureRegion(new Texture(Gdx.files.internal("npc/adult1.png")));
         region = new TextureRegion(new Texture(Gdx.files.internal("npc/"+randomImage[rand.nextInt(4)])));
         int frameWidth = region.getRegionWidth() / 3; //3x4
@@ -71,18 +67,12 @@ public class Adult extends NPC {
         walkUpTextures.add(new TextureRegion(region, 2 * frameWidth, 3 * frameHeight, frameWidth, frameHeight));
 
         img = walkDownTextures.get(1);
-        hitbox.setSize(imgWidth, imgHeight);
-        shapeRenderer = new ShapeRenderer();
+
 
     }
     @Override
     protected void walk(){
 
-        hitbox.setPosition(locationX, locationY);
-        //if overlap with mouse cursor
-        if(hitbox.overlaps(cursor.box)){
-            System.out.println("NPC overlap cursor");
-        }
 
         if(endTick>=clock.tick) {
             switch(direction) {

@@ -23,6 +23,7 @@ public class Human extends NPC {
 
     GameClock clock = GameClock.getInstance();
     double speed = 2;
+    double oriSpeed = 2;
 
     int startTick = 0;
     int endTick=startTick+10;
@@ -70,11 +71,6 @@ public class Human extends NPC {
     @Override
     protected void walk(){
 
-        hitbox.setPosition(locationX, locationY);
-        //if overlap with mouse cursor
-        if(hitbox.overlaps(cursor.box)){
-            System.out.println("NPC overlap cursor");
-        }
 
         if(endTick>=clock.tick) {
             switch(direction) {
@@ -125,6 +121,10 @@ public class Human extends NPC {
         }
 
 
+    }
+    @Override
+    public void setSpeed(double multiplier) {
+        speed = oriSpeed * multiplier;
     }
 
     public void loadTexture(List<TextureRegion> textures) {

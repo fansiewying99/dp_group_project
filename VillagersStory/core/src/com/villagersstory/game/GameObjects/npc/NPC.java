@@ -1,11 +1,14 @@
 package com.villagersstory.game.GameObjects.npc;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.villagersstory.game.GameObjects.GameObject;
 
 import java.util.Random;
 
 public abstract class NPC extends GameObject {
-
+    public TextureRegion img;
+    public int imgWidth;
+    public int imgHeight;
     protected Random rand = new Random();
     protected int direction = rand.nextInt(4); //false = x
 
@@ -25,4 +28,6 @@ public abstract class NPC extends GameObject {
         walk();  // primitive method
     }
     abstract protected void walk();
+
+    public abstract void setSpeed(double v);
 }
