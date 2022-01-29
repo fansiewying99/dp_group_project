@@ -143,11 +143,10 @@ public class GameDisplay {
         game.font.draw(game.batch, ": "+String.format("%02d", clock.min), 1200, 690);
     }
     public void generateHouse(){
-        for(int i=0; i<5; i++) {
-            houses.add(new House());
-            houses.get(i).locationX = rand.nextInt(1280);
-            houses.get(i).locationY = rand.nextInt(540);
-        }
+        houses.add(new House());
+        houses.get(houses.size()-1).locationX = rand.nextInt(1280);
+        houses.get(houses.size()-1).locationY = rand.nextInt(540);
+
     }
     private void displayGround() {
         for(int i=0; i< ground.height/ground.tileSize; i++) {
@@ -284,6 +283,8 @@ public class GameDisplay {
         animalButtons.add(new TextButton("Add Dog", skin));
         animalButtons.add(new TextButton("Add Dragon", skin));
 
+        houseButtons.add(new TextButton("Add House", skin));
+
         bgCanvas.add(table).expand().top().fillX();
         stage.addActor(bgCanvas);
 
@@ -303,7 +304,7 @@ public class GameDisplay {
                         tempButtons = skyButtons;
                     }
                     else if(str.equals("Houses")){
-                        System.out.println("empty");
+                        tempButtons = houseButtons;
                     }
                     else if(str.equals("Trees")){
                         tempButtons = treeButtons;
@@ -351,6 +352,9 @@ public class GameDisplay {
                                         //
                                     } else if (str.equals("Add Dragon")) {
                                         //
+                                    }
+                                    else if (str.equals("Add House")) {
+                                        generateHouse();
                                     }
 
                                 }
