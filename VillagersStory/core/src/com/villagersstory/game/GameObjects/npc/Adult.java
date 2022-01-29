@@ -6,16 +6,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
-import com.villagersstory.game.Cursor;
 import com.villagersstory.game.GameClock;
-import com.villagersstory.game.GameObjects.npc.NPC;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Adult extends NPC {
     public Rectangle hitbox = new Rectangle();
-    Cursor cursor = Cursor.getInstance();
 
     String[] randomImage = {"adult1.png", "adult2.png", "adult3.png", "adult4.png"};
 

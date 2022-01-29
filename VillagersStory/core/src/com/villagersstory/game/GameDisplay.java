@@ -3,10 +3,8 @@ package com.villagersstory.game;
 import com.badlogic.gdx.Gdx;
 
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -14,14 +12,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.villagersstory.game.GameObjects.GameUI;
-import com.villagersstory.game.GameObjects.Sky;
-import com.villagersstory.game.GameObjects.WeatherFacade;
+import com.villagersstory.game.GameObjects.sky.Sky;
+import com.villagersstory.game.GameObjects.sky.WeatherFacade;
 import com.villagersstory.game.GameObjects.npc.Adult;
 import com.villagersstory.game.GameObjects.npc.Child;
 import com.villagersstory.game.GameObjects.npc.NPC;
 import com.villagersstory.game.GameObjects.house.House;
-import com.villagersstory.game.GameObjects.npc.Human;
 
 import com.villagersstory.game.GameObjects.animal.Animal;
 import com.villagersstory.game.GameObjects.animal.Bird;
@@ -29,7 +25,6 @@ import com.villagersstory.game.GameObjects.animal.BirdAdapter;
 import com.villagersstory.game.GameObjects.animal.Cat;
 import com.villagersstory.game.GameObjects.animal.Dog;
 
-import com.villagersstory.game.GameObjects.tree.Fruit;
 import com.villagersstory.game.GameObjects.tree.Tree;
 import com.villagersstory.game.GameObjects.tree.TreeFactory;
 
@@ -363,7 +358,7 @@ public class GameDisplay {
                         }
 
                     }
-                    System.out.println(tempButtons.size());
+
                 }
             });
         }

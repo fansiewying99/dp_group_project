@@ -27,10 +27,10 @@ public class GameScreen implements Screen {
 
         // create the camera and the SpriteBatch
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 640, 360);
-//        camera.setToOrtho(false, 1280, 720);
+//        camera.setToOrtho(false, 640, 360);
+        camera.setToOrtho(false, 1280, 720);
         cameraPos = new Vector3();
-//        camSettings.setResolution(camera, true);
+        camSettings.setResolution(camera, true);
     }
 
 

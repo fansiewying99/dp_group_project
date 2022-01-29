@@ -6,9 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
-import com.villagersstory.game.Cursor;
 import com.villagersstory.game.GameClock;
-import com.villagersstory.game.GameObjects.npc.NPC;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +14,6 @@ import java.util.Random;
 
 public class Child extends NPC {
     public Rectangle hitbox = new Rectangle();
-    Cursor cursor = Cursor.getInstance();
 
     Random rand = new Random();
     String[] randomImage = {"child1.png", "child2.png", "child3.png", "child4.png"};
@@ -136,10 +133,5 @@ public class Child extends NPC {
         else
             textureIndex=0;
         img=textures.get(textureIndex);
-    }
-    public void draw(){
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.rect(hitbox.x-width/2, hitbox.y-height/2, hitbox.width, hitbox.height);
-        shapeRenderer.end();
     }
 }

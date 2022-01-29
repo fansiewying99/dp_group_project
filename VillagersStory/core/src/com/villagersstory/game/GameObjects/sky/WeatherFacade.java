@@ -1,12 +1,10 @@
-package com.villagersstory.game.GameObjects;
+package com.villagersstory.game.GameObjects.sky;
 
 import com.villagersstory.game.GameObjects.animal.Animal;
 import com.villagersstory.game.GameObjects.animal.BirdAdapter;
-import com.villagersstory.game.GameObjects.npc.Adult;
 import com.villagersstory.game.GameObjects.npc.NPC;
 import com.villagersstory.game.VillagerStory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WeatherFacade {

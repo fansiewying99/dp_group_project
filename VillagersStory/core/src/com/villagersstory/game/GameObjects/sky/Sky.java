@@ -1,10 +1,11 @@
-package com.villagersstory.game.GameObjects;
+package com.villagersstory.game.GameObjects.sky;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.villagersstory.game.GameClock;
+import com.villagersstory.game.GameObjects.GameObject;
 
 import java.util.Random;
 
