@@ -24,7 +24,8 @@ public class MainMenuScreen implements Screen {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 1280, 720);
 
-        bgImage = new Texture(Gdx.files.internal("../core/assets/title.png"));
+        bgImage = new Texture(Gdx.files.internal("title3.png"));
+
         bg = new Rectangle();
         bg.width = 1280;
         bg.height = 720;
@@ -47,8 +48,6 @@ public class MainMenuScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
         game.batch.draw(bgImage, bg.x, bg.y, bg.width, bg.height);
-        game.font.draw(game.batch, "Welcome to Villager Story!!! ", 100, 150);
-        game.font.draw(game.batch, "Tap anywhere to begin!", 100, 100);
         game.batch.end();
 
         if (Gdx.input.isTouched()) {

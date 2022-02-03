@@ -7,9 +7,6 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
 public class GameInput {
-    /**
-     * call object methods instead
-     */
     GameCamera camSettings = GameCamera.getInstance();
     public void receiveInput(Vector3 cameraPos, OrthographicCamera camera){
         if (Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.A))
@@ -21,13 +18,14 @@ public class GameInput {
         if (Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.W))
             cameraPos.y += 200 * Gdx.graphics.getDeltaTime();
 
-        // process user input
-        if (Gdx.input.isTouched()) {
-            Vector3 touchPos = new Vector3();
-            touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-            camera.unproject(touchPos);
-            cameraPos.x = touchPos.x;
-            cameraPos.y = touchPos.y;
-        }
+        // move camera using mouse click
+//        if (Gdx.input.isTouched()) {
+//            Vector3 touchPos = new Vector3();
+//            touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+//            camera.unproject(touchPos);
+//            cameraPos.x = touchPos.x;
+//            cameraPos.y = touchPos.y;
+//        }
+
     }
 }

@@ -4,7 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameClock extends TimerTask {
-    private static GameClock clock = new GameClock();
+    private static final GameClock clock = new GameClock();
     public int day,hour,min;
     public int tick;
     public int i = 0;
@@ -30,7 +30,9 @@ public class GameClock extends TimerTask {
     public void run(){
         i++;
         min = i;
+
         tick++;
+
         if (min == 60) {
             min=0;
             i=0;
