@@ -12,7 +12,6 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import static com.badlogic.gdx.graphics.GL20.GL_COLOR_BUFFER_BIT;
 
 public class MainMenuScreen implements Screen {
-
     final VillagerStory game;
     Texture bgImage;
     OrthographicCamera camera;
@@ -39,7 +38,6 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void render(float delta) {
-
         ScreenUtils.clear(0, 0, 0.2f, 1);
 
         camera.update();
@@ -80,8 +78,4 @@ public class MainMenuScreen implements Screen {
     public void dispose() {
 
     }
-
-
-    //...Rest of class omitted for succinctness.
-
 }

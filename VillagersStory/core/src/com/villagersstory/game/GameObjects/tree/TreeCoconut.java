@@ -16,7 +16,6 @@ public class TreeCoconut extends GameObject implements Tree{
 
     public TreeCoconut() {
         image = new Texture(Gdx.files.internal(imgFile));
-
     }
 
     @Override
@@ -51,13 +50,10 @@ public class TreeCoconut extends GameObject implements Tree{
 
     @Override
     public void reactWind() {
-
     }
 
     @Override
     public ArrayList<Fruit> dropFruit() {
         return fruits;
     }
-
-
 }
