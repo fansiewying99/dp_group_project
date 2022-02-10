@@ -27,7 +27,6 @@ public class GameScreen implements Screen {
 
         // create the camera and the SpriteBatch
         camera = new OrthographicCamera();
-//        camera.setToOrtho(false, 640, 360);
         camera.setToOrtho(false, 1280, 720);
         cameraPos = new Vector3();
         camSettings.setResolution(camera, true);
@@ -43,12 +42,7 @@ public class GameScreen implements Screen {
         // tell the SpriteBatch to render in the
         // coordinate system specified by the camera.
         game.batch.setProjectionMatrix(camera.combined);
-
-
         gameDisplay.render();//use GameDisplay class
-
-//        game.batch.end();
-
         camera.position.lerp(cameraPos,0.1f);
 
         gameInput.receiveInput(cameraPos, camera); //go to input class
@@ -58,10 +52,6 @@ public class GameScreen implements Screen {
         if (Gdx.input.isKeyJustPressed(com.badlogic.gdx.Input.Keys.E)) {
             camToggle=camSettings.setResolution(camera, camToggle);
         }
-//        if (Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.F)) {
-//            bgImage = ColorChange.genTexture("background ex.png");
-//        }
-
     }
 
     @Override
@@ -89,8 +79,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-//        bgImage.dispose();
     }
-
 }
 

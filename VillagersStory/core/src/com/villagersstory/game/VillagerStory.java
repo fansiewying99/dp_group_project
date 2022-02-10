@@ -8,7 +8,6 @@ public class VillagerStory extends Game {
 	public SpriteBatch batch;
 	BitmapFont font;
 
-
 	public void create() {
 		batch = new SpriteBatch();
 		// Use LibGDX's default Arial font.

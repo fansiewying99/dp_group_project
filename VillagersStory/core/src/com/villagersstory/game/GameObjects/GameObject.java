@@ -17,6 +17,6 @@ public class GameObject {
     public int locationX;
     public int locationY;
     public void display(){
-
+    	System.out.println("its game object");
     }
 }

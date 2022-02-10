@@ -62,4 +62,7 @@ public class GroundGrid {
         this.height = height;
         grid = new Texture[height][width];
     }
+    public Texture[][] getGrid() {
+    	return grid;
+    }
 }

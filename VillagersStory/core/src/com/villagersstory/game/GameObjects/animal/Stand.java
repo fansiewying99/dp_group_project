@@ -9,102 +9,79 @@ import com.villagersstory.game.GameClock;
 import com.villagersstory.game.VillagerStory;
 import com.villagersstory.game.GameObjects.GameObject;
 
-public class Walk extends GameObject implements MoveBehaviour{
-	
+public class Stand extends GameObject implements MoveBehaviour{
 	VillagerStory game;
-	private List<Texture> moveRightTextures=new ArrayList<>();
-	private List<Texture> moveLeftTextures=new ArrayList<>();
-	private List<Texture> moveUpTextures=new ArrayList<>();
-	private List<Texture> moveDownTextures=new ArrayList<>();
-	private int width;
-	private int height;
-	private boolean isNoBound;
+	protected List<Texture> moveRightTextures=new ArrayList<>();
+	protected List<Texture> moveLeftTextures=new ArrayList<>();
+	protected List<Texture> moveUpTextures=new ArrayList<>();
+	protected List<Texture> moveDownTextures=new ArrayList<>();
+	protected int width;
+	protected int height;
 	Random rand = new Random();
-	private int textureIndex;
+	int textureIndex;
 	private final float initWait;
 	private float wait;
 	GameClock clock = GameClock.getInstance();
-	private int startTick = 0;
-	private int endTick=startTick+40;
-	private double speed = 1;
-	private int direction = rand.nextInt(4);
+	int startTick = 0;
+    int endTick=startTick+10;
+    double speed = 1;
+    int direction = rand.nextInt(4);
 	
-	public Walk(VillagerStory game, List<Texture> moveRightTextures, 
-			List<Texture> moveLeftTextures, 
-			List<Texture> moveUpTextures, 
-			List<Texture> moveDownTextures,
+	public Stand(VillagerStory game, List<Texture> standRightTextures, 
+			List<Texture> standLeftTextures, 
+			List<Texture> standUpTextures, 
+			List<Texture> standDownTextures,
 			int width,
-			int height,
-			int speed) {
+			int height) {
 		this.game=game;
-		this.moveRightTextures=moveRightTextures;
-		this.moveLeftTextures=moveLeftTextures;
-		this.moveUpTextures=moveUpTextures;
-		this.moveDownTextures=moveDownTextures;
+		this.moveRightTextures=standRightTextures;
+		this.moveLeftTextures=standLeftTextures;
+		this.moveUpTextures=standUpTextures;
+		this.moveDownTextures=standDownTextures;
 		this.width=width;
 		this.height=height;
-		this.speed=this.speed*speed;
-		
+
 		if(image==null)
-			image=moveDownTextures.get(1);
+			image=standDownTextures.get(0);
 		locationX=rand.nextInt(1280);
 		locationY=rand.nextInt(540);
 		textureIndex=0;
 		
 		initWait=20;
 		wait=initWait;
-		
 	}
-	
-	private void checkBounds(){ //world bounds 1280x540
-        if(locationX<0)
-            direction = 0;
-        else if(locationX>1280)
-            direction = 1;
-        else if(locationY<0)
-            direction = 2;
-        else if(locationY>540)
-            direction = 3;
-    }
 
 	@Override
 	public void move() {
 		if(endTick>=clock.tick) {
-			if(!this.isNoBound) {
-				checkBounds();
-			}
             switch(direction) {
                 case(0): //right
-                	if(wait<=0) {
+                	if(wait==0) {
 	                	setImage(moveRightTextures);
-	                    locationX += speed;
 	                    wait=initWait;
                 	}else if(wait>0) {
                 		wait-=speed;
                 	}
                     break;
                 case(1): //left
-                	if(wait<=0) {
+                	if(wait==0) {
                 		setImage(moveLeftTextures);
-	                    locationX -= speed;
 	                    wait=initWait;
                 	}else if(wait>0) {
                 		wait-=speed;
                 	}
                     break;
                 case(2): //up
-                	if(wait<=0) {
+                	if(wait==0) {
                 		setImage(moveUpTextures);
-	                    locationY += speed;
 	                    wait=initWait;
 		        	}else if(wait>0) {
 		        		wait-=speed;
 		        	}
                     break;
                 case(3): //down
-                	if(wait<=0) {
+                	if(wait==0) {
                 		setImage(moveDownTextures);
-	                    locationY -= speed;
 	                    wait=initWait;
 		        	}else if(wait>0) {
 		        		wait-=speed;
@@ -113,7 +90,6 @@ public class Walk extends GameObject implements MoveBehaviour{
             }
 		}
         else {
-			
             startTick = clock.tick;
             endTick = startTick + 1;
 
@@ -121,11 +97,11 @@ public class Walk extends GameObject implements MoveBehaviour{
         }
 		game.batch.draw(getImage(), getLocationX(), getLocationY(), width, height);
 	}
-
-	private Texture getImage() {
+	
+	public Texture getImage() {
 		return super.image;
 	}
-	private void setImage(List <Texture> textures) {
+	public void setImage(List <Texture> textures) {
 		if(textureIndex < textures.size()-1) {
 			textureIndex+=1;	
 		}
@@ -133,6 +109,7 @@ public class Walk extends GameObject implements MoveBehaviour{
 			textureIndex=0;
 		image=textures.get(textureIndex);
 	}
+
 	@Override
 	public void setLocationY(int y) {
 		locationY=y;
@@ -181,13 +158,16 @@ public class Walk extends GameObject implements MoveBehaviour{
 	public void setMoveDownTextures(List<Texture> moveDownTextures) {
 		this.moveDownTextures = moveDownTextures;
 	}
+	
 	@Override
 	public String getCurrentMoveBehaviour() {
-		return "walk";
+		// TODO Auto-generated method stub
+		return "stand";
 	}
 
 	@Override
 	public void setNoBound(boolean isNoBound) {
-		this.isNoBound=isNoBound;
+		// TODO Auto-generated method stub
+		
 	}
 }
