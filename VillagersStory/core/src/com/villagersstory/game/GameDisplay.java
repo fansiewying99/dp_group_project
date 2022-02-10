@@ -5,13 +5,19 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.villagersstory.game.GameObjects.sky.Sky;
 import com.villagersstory.game.GameObjects.sky.WeatherFacade;
 import com.villagersstory.game.GameObjects.npc.Adult;
@@ -20,11 +26,13 @@ import com.villagersstory.game.GameObjects.npc.NPC;
 import com.villagersstory.game.GameObjects.house.House;
 
 import com.villagersstory.game.GameObjects.animal.Animal;
-import com.villagersstory.game.GameObjects.animal.Bird;
-import com.villagersstory.game.GameObjects.animal.BirdAdapter;
 import com.villagersstory.game.GameObjects.animal.Cat;
 import com.villagersstory.game.GameObjects.animal.Dog;
-
+import com.villagersstory.game.GameObjects.animal.Dragon;
+import com.villagersstory.game.GameObjects.ground.Ground;
+import com.villagersstory.game.GameObjects.ground.GroundDecorator;
+import com.villagersstory.game.GameObjects.ground.NormalGround;
+import com.villagersstory.game.GameObjects.ground.PuddleGround;
 import com.villagersstory.game.GameObjects.tree.Tree;
 import com.villagersstory.game.GameObjects.tree.TreeFactory;
 
@@ -47,12 +55,12 @@ public class GameDisplay {
     Music townMusic = Gdx.audio.newMusic(Gdx.files.internal("TownTheme.mp3"));
     Music rainMusic = Gdx.audio.newMusic(Gdx.files.internal("Rain.mp3"));
     GroundGrid ground = GroundGrid.getInstance();
+    Ground gd;
 
     List<House> houses = new ArrayList<>();
     List<NPC> human = new ArrayList<>();
 
     List<Animal> animals = new ArrayList<>();
-    List<BirdAdapter> birds = new ArrayList<>();
 
     TreeFactory treeFactory = TreeFactory.getInstance();
     List<Tree> trees = new ArrayList<>();;
@@ -94,10 +102,10 @@ public class GameDisplay {
         bg.width = 1280;
         bg.height = 720;
         ground.generateGrass();
-
+        gd=new NormalGround(game, ground);
         createUI();
         sky = new Sky();
-        weather = new WeatherFacade(game, sky, human, animals, birds);
+        weather = new WeatherFacade(game, sky, human, animals);
     }
 
     public void render() {
@@ -114,8 +122,9 @@ public class GameDisplay {
         displayHouse();
         displayTree();
 
-        displayAnimal();
+        
         displayHumans();
+        displayAnimal();
 
         if (sky.getColour().equals(Sky.rainy)){
             displaySky();
@@ -144,12 +153,15 @@ public class GameDisplay {
 
     }
     private void displayGround() {
-        for(int i=0; i< ground.height/ground.tileSize; i++) {
-            for (int j = 0; j < ground.width /ground.tileSize; j++) {
-                game.batch.draw(ground.grid[i][j], j*ground.tileSize, i*ground.tileSize, ground.tileSize, ground.tileSize);
-            }
-        }
+    	gd.create();
     }
+    private void setPuddleGround() {
+    	gd=new PuddleGround(game, ground);
+    }
+    private void setNormalGround() {
+    	gd=new NormalGround(game, ground);
+    }
+    
     private void displayHouse() {
         for(int i=0; i<houses.size(); i++) {
             game.batch.draw(houses.get(i).image, houses.get(i).locationX, houses.get(i).locationY, 128, 128);
@@ -184,42 +196,28 @@ public class GameDisplay {
             game.batch.draw(human.get(i).img, human.get(i).locationX, human.get(i).locationY, human.get(i).imgWidth, human.get(i).imgHeight);
         }
     }
-    public void generateAnimal(){
-    	//int ranInt=rand.nextInt(3);
-    	for(int i=0; i<10; i++) {
-    		int ranInt=rand.nextInt(3)+1;
-    		System.out.println(ranInt);
-    		
-    		if(ranInt==2) {
-    			BirdAdapter bird=new BirdAdapter(new Bird());
-	            birds.add(bird);
-	            bird.setLocationX(rand.nextInt(1280));
-	            bird.setLocationY(rand.nextInt(540));
-    		}else{
-    			Animal animal=null;
-	    		if(ranInt==1) {
-	    			animal=new Cat();
-	    		}
-	    		else if(ranInt==3) {
-	    			animal=new Dog();
-	    		}
-	    		animal.setLocationX(rand.nextInt(1280));
-	            animal.setLocationY(rand.nextInt(540));
-	            animals.add(animal);
-    		}
-        }
+    public void generateAnimal(String animalStr){
+    	Animal animal=null;
+    	if(animalStr=="Cat") {
+    		animal=new Cat();
+    		animal.setMoveBehaviour(game, "walk");
+        	animals.add(0, animal);
+    	}
+    	else if(animalStr=="Dog") {
+    		animal=new Dog();
+    		animal.setMoveBehaviour(game, "walk");
+        	animals.add(0, animal);
+    	}
+    	else if(animalStr=="Dragon") {
+    		animal=new Dragon(); //temp
+    		animal.setMoveBehaviour(game, "walk");
+        	animals.add(animal);
+    	}
+    	
     }
     public void displayAnimal(){
         for(int i=0; i<animals.size(); i++) {
-            NPC animalNPC = (NPC) animals.get(i);
-            if(animalNPC!= null)
-                animalNPC.move();
-
-            game.batch.draw(animals.get(i).getImage(), animals.get(i).getLocationX(), animals.get(i).getLocationY(), 30, 30);
-        }
-        for(int i=0; i<birds.size(); i++) {
-            birds.get(i).fly();
-            game.batch.draw(birds.get(i).getImage(), birds.get(i).getLocationX(), birds.get(i).getLocationY(), 130, 130);
+        	animals.get(i).performMove();
         }
     }
     public void displaySky(){
@@ -289,10 +287,6 @@ public class GameDisplay {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     table.clear();
-//                    for(int i=0; i<tempButtons.size(); i++) {
-//                        tempButtons.get(i).clearListeners();
-//                    }
-
                     System.out.println("I was clicked");
                     String str = menu.get(finalI).getText().toString();
                     if(str.equals("Sky & Weather")){
@@ -322,13 +316,29 @@ public class GameDisplay {
                                     System.out.println("temp buttons");
                                     String str = tempButtons.get(finalJ).getText().toString();
                                     if (str.equals("Sunny")) {
+                                    	setNormalGround();
                                         weather.changeWeather("sunny");
+                                        for(int i=0; i<animals.size(); i++) {
+                                        	animals.get(i).setMoveBehaviour(game, "walk");
+                                        }
                                     } else if (str.equals("Rainy")) {
+                                    	setPuddleGround();
                                         weather.changeWeather("rainy");
+                                        for(int i=0; i<animals.size(); i++) {
+                                        	animals.get(i).setMoveBehaviour(game, "run");
+                                        }
                                     } else if (str.equals("Dusk")) {
+                                    	setNormalGround();
                                         weather.changeWeather("evening");
+                                        for(int i=0; i<animals.size(); i++) {
+                                        	animals.get(i).setMoveBehaviour(game, "walk");
+                                        }
                                     } else if (str.equals("Night")) {
+                                    	setNormalGround();
                                         weather.changeWeather("dark");
+                                        for(int i=0; i<animals.size(); i++) {
+                                        	animals.get(i).setMoveBehaviour(game, "stand");
+                                        }
                                     } else if (str.equals("Add Adult")) {
                                         generateHumans("adult");
                                     } else if (str.equals("Add Child")) {
@@ -342,11 +352,11 @@ public class GameDisplay {
                                     } else if (str.equals("Add Pine Tree")) {
                                         trees.add(treeFactory.createTree("pine"));
                                     } else if (str.equals("Add Cat")) {
-                                        //
+                                        generateAnimal("Cat");
                                     } else if (str.equals("Add Dog")) {
-                                        //
+                                    	generateAnimal("Dog");
                                     } else if (str.equals("Add Dragon")) {
-                                        //
+                                    	generateAnimal("Dragon");
                                     }
                                     else if (str.equals("Add House")) {
                                         generateHouse();

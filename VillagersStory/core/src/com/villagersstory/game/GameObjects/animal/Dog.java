@@ -1,170 +1,56 @@
-package com.villagersstory.game.GameObjects.animal;
+ package com.villagersstory.game.GameObjects.animal;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.villagersstory.game.GameClock;
-import com.villagersstory.game.GameObjects.npc.NPC;
+import com.villagersstory.game.VillagerStory;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
-public class Dog extends NPC implements Animal{
-
-    ArrayList<Integer> movement = new ArrayList<>();
-    GameClock clock = GameClock.getInstance();
-    double speed = 1;
-	double oriSpeed = 1;
-    int startTick = 0;
-    int endTick=startTick+1;
-    
-    private final float initWait;
-	private float wait;
-    
-    int textureIndex=0;
-    
-    
-    final List<Texture> walkRightTextures=new ArrayList<>();
-	final List<Texture> walkLeftTextures=new ArrayList<>();
-	final List<Texture> walkUpTextures=new ArrayList<>();
-	final List<Texture> walkDownTextures=new ArrayList<>();
-	final Texture standRight;
-	final Texture standLeft;
-	final Texture standUp;
-	final Texture standDown;
-
-    public Dog() {
-    	
-        //image = new Texture(Gdx.files.internal(imgFile));
-    	
-    	
-    	//initialise textures
-		standRight=new Texture(Gdx.files.internal("dog/dog_right_stand.png"));
+public class Dog extends Animal{
+	public Dog() {
+		//super.game=game;
+		//initialise textures
+		Texture standRight=new Texture(Gdx.files.internal("dog/dog_right_stand.png"));
 		Texture walkRight1=new Texture(Gdx.files.internal("dog/dog_right_walk_1.png"));
 		Texture walkRight2=new Texture(Gdx.files.internal("dog/dog_right_walk_2.png"));
-		standLeft=new Texture(Gdx.files.internal("dog/dog_left_stand.png"));
+		Texture standLeft=new Texture(Gdx.files.internal("dog/dog_left_stand.png"));
 		Texture walkLeft1=new Texture(Gdx.files.internal("dog/dog_left_walk_1.png"));
 		Texture walkLeft2=new Texture(Gdx.files.internal("dog/dog_left_walk_2.png"));
-		standUp=new Texture(Gdx.files.internal("dog/dog_up_stand.png"));
+		Texture standUp=new Texture(Gdx.files.internal("dog/dog_up_stand.png"));
 		Texture walkUp1=new Texture(Gdx.files.internal("dog/dog_up_walk_1.png"));
 		Texture walkUp2=new Texture(Gdx.files.internal("dog/dog_up_walk_2.png"));
-		standDown=new Texture(Gdx.files.internal("dog/dog_down_stand.png"));
+		Texture standDown=new Texture(Gdx.files.internal("dog/dog_down_stand.png"));
 		Texture walkDown1=new Texture(Gdx.files.internal("dog/dog_down_walk_1.png"));
 		Texture walkDown2=new Texture(Gdx.files.internal("dog/dog_down_walk_2.png"));
+				
+		moveRightTextures.add(walkRight1);
+		moveRightTextures.add(standRight);
+		moveRightTextures.add(walkRight2);
+		moveRightTextures.add(standRight);
 		
-		walkRightTextures.add(walkRight1);
-		walkRightTextures.add(walkRight2);
-		walkLeftTextures.add(walkLeft1);
-		walkLeftTextures.add(walkLeft2);
-		walkUpTextures.add(walkUp1);
-		walkUpTextures.add(walkUp2);
-		walkDownTextures.add(walkDown1);
-		walkDownTextures.add(walkDown2);
+		moveLeftTextures.add(walkLeft1);
+		moveLeftTextures.add(standLeft);
+		moveLeftTextures.add(walkLeft2);
+		moveLeftTextures.add(standLeft);
 		
-		image=standDown;
+		moveUpTextures.add(walkUp1);
+		moveUpTextures.add(standUp);
+		moveUpTextures.add(walkUp2);
+		moveUpTextures.add(standUp);
 		
-		initWait=10;
-		wait=initWait;
-    }
-
-	@Override
-	protected void walk(){
-
-        if(endTick>=clock.tick) {
-            switch(direction) {
-//                Gdx.graphics.getDeltaTime()
-                case(0): //right
-                	if(wait==0) {
-	                	getAnimal(walkRightTextures);
-	                    locationX += speed;
-	                    wait=initWait;
-                	}else if(wait>0) {
-                		wait-=1;
-                	}
-                    break;
-                case(1): //left
-                	if(wait==0) {
-	                	getAnimal(walkLeftTextures);
-	                    locationX -= speed;
-	                    wait=initWait;
-                	}else if(wait>0) {
-                		wait-=1;
-                	}
-                    break;
-                case(2): //up
-                	if(wait==0) {
-	                	getAnimal(walkUpTextures);
-	                    locationY += speed;
-	                    wait=initWait;
-		        	}else if(wait>0) {
-		        		wait-=1;
-		        	}
-                    break;
-                case(3): //down
-                	if(wait==0) {
-	                	getAnimal(walkDownTextures);
-	                    locationY -= speed;
-	                    wait=initWait;
-		        	}else if(wait>0) {
-		        		wait-=1;
-		        	}
-                    break;
-            }
-        }
-        else {
-            startTick = clock.tick;
-            endTick = startTick + 1;
-
-            direction = rand.nextInt(4);
-        }
-    }
-    
-	public Texture getAnimal(List <Texture> textures) {
-		//List <Texture> textures=walkRightTextures;
-		if(textureIndex < textures.size()-1) {
-			textureIndex+=1;	
-		}
+		moveDownTextures.add(walkDown1);
+		moveDownTextures.add(standDown);
+		moveDownTextures.add(walkDown2);
+		moveDownTextures.add(standDown);
 		
-		else
-			textureIndex=0;
-		image=textures.get(textureIndex);
+		standDownTextures.add(standDown);
+		standLeftTextures.add(standLeft);
+		standUpTextures.add(standUp);
+		standRightTextures.add(standRight);
 		
-		return image;
+		height=30;
+		width=30;
+		speed=2;
 	}
-
-	@Override
-	public int getLocationX() {
-		// TODO Auto-generated method stub
-		return locationX;
-	}
-	@Override
-	public int getLocationY() {
-		// TODO Auto-generated method stub
-		return locationY;
-	}
-	@Override
-	public void setLocationX(int x) {
-		// TODO Auto-generated method stub
-		locationX=x;
-	}
-	@Override
-	public void setLocationY(int y) {
-		// TODO Auto-generated method stub
-		locationY=y;
-	}
-	@Override
-	public Texture getImage() {
-		// TODO Auto-generated method stub
-		return image;
-	}
-
-	@Override
-	public String animalName() {
-		// TODO Auto-generated method stub
-		return "Cat";
-	}
-	@Override
-	public void setSpeed(double multiplier) {
-		speed = oriSpeed * multiplier;
+	public void display() {
+		System.out.println("its a dog");
 	}
 }
